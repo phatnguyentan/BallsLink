@@ -16,9 +16,10 @@
 #define MATRIX_WIDTH (8)
 #define MATRIX_HEIGHT (8)
 
-PlayLayer::PlayLayer() 
-: _matrix(NULL)
+PlayLayer::PlayLayer()
 {
+  _height = MATRIX_HEIGHT;
+  _width = MATRIX_WIDTH;
 }
 
 PlayLayer::PlayLayer(const PlayLayer& orig) {
@@ -26,44 +27,32 @@ PlayLayer::PlayLayer(const PlayLayer& orig) {
 
 PlayLayer::~PlayLayer() {
 }
-//CCLabelBMFont *label =CCLabelBMFont::create("Bitmap Font Atlas" , "bitmapFontTest.fnt");
-//CCSprite *char_B = label->getChildByTag(0); // character 'B'
-//CCSprite *char_m = label->getChildByTag(3); // character 'm'
 
-//bool PlayLayer::init()
-//{
-//    if (!Layer::init()) {
-//        return false;
-//    }
-//    
-//    Size winSize = Director::getInstance()->getWinSize();
-//    auto background = Sprite::create("sushi/background.png");
-//    background->setAnchorPoint(Vec2(0, 1));
-//    background->setPosition(Vec2(0, winSize.height));
-//    this->addChild(background);
-//    
-//    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sushi/sushi.plist");
-//    spriteSheet = SpriteBatchNode::create("sushi/sushi.pvr.ccz");
-//    addChild(spriteSheet);
-//    
-//    m_width = MATRIX_WIDTH;
-//    m_height = MATRIX_HEIGHT;
-//    
-//    m_matrixLeftBottomX = (winSize.width - SushiSprite::getContentWidth() * m_width - (m_width - 1) * SUSHI_GAP) / 2;
-//    m_matrixLeftBottomY = (winSize.height - SushiSprite::getContentWidth() * m_height - (m_height - 1) * SUSHI_GAP) / 2;
-//    
-//    int arraySize = sizeof(SushiSprite *) * m_width * m_height;
-//    m_matrix = (SushiSprite **)malloc(arraySize);
-//    memset((void*)m_matrix, 0, arraySize);
-//    
-//    initMatrix();
-//    return true;
-//}
-//
+Scene *PlayLayer::createScene()
+{
+    auto scene = Scene::create();
+    auto layer = PlayLayer::create();
+    scene->addChild(layer);
+    return scene;
+}
 
 bool PlayLayer::init() {
   if (!Layer::init()) {
     return false;
   }
+//  Create matrix
+  for (int row = 0; row < _height; row++) {
+    for (int col = 0; col < _width; col++) {
+//      Label *label = Label::create("Bitmap Font Atlas" , "arial.ttf");
+//      Sprite *char_B = label->getChildByTag(0); // character 'B'
+//      Sprite *char_m = label->getChildByTag(3); // character 'm'
+//       auto label = Label::createWithBMFont("res/arial.fnt", "Cocos rules!", TextHAlignment::LEFT, 0, offset);
+    }
+  }
+  
+  auto numbers = NumberSprite::initNumbers();
+  numbers->setPosition(Vec2(200, 200));
+  addChild(numbers);
+  
   return true;
 }

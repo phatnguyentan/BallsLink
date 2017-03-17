@@ -14,16 +14,25 @@
 #ifndef PLAYLAYER_H
 #define PLAYLAYER_H
 
+#include "cocos2d.h"
+#include "NumberSprite.h"
+USING_NS_CC;
+
 class PlayLayer : public Layer {
 public:
   PlayLayer();
   PlayLayer(const PlayLayer& orig);
   virtual ~PlayLayer();
   
-  virtual bool init();
+  static Scene* createScene();
+  virtual bool init() override;
+  CREATE_FUNC(PlayLayer);
 private:
-  NumberSprite** _matrix;
-
+  Vector<NumberSprite*> _matrix;
+  int _width;
+  int _height;
+  float _matrixLeftBottomX;
+  float _matrixLeftBottomY;
 };
 
 #endif /* PLAYLAYER_H */

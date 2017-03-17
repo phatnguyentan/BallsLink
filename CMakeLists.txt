@@ -144,8 +144,8 @@ set(GAME_SRC
   Classes/Controllers/ManagerController.cpp
   Classes/Controllers/BaseController.cpp
   Classes/Controllers/SceneController.cpp
-  Classes/Scenes/PlayLayer.cpp
-  Classes/Scenes/SushiSprite.cpp
+  Classes/Scenes/MainScene/PlayLayer.cpp
+  Classes/Scenes/MainScene/NumberSprite.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -154,8 +154,8 @@ set(GAME_HEADERS
   Classes/Controllers/ManagerController.h
   Classes/Controllers/BaseController.h
   Classes/Controllers/SceneController.h
-  Classes/Scenes/PlayLayer.h
-  Classes/Scenes/SushiSprite.h
+  Classes/Scenes/MainScene/PlayLayer.h
+  Classes/Scenes/MainScene/NumberSprite.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
