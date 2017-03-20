@@ -13,7 +13,7 @@
 #include "SceneController.h"
 
 SceneController::SceneController() {
-  _current_scene = PlayLayer::createScene();
+  _current_scene = PlayScene::createScene();
   _director = cocos2d::Director::getInstance();
   _director->runWithScene(_current_scene);
 }

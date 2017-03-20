@@ -11,22 +11,24 @@
  * Created on March 17, 2017, 1:37 PM
  */
 
-#ifndef NUMBERSPRITE_H
-#define NUMBERSPRITE_H
+#ifndef NUMBERLAYER_H
+#define NUMBERLAYER_H
 
 #include "cocos2d.h"
 USING_NS_CC;
 
-class NumberSprite :  public Sprite {
+class NumberLayer :  public Layer {
 public:
-  NumberSprite();
-  NumberSprite(const NumberSprite& orig);
-  virtual ~NumberSprite();
+  NumberLayer();
+  NumberLayer(const NumberLayer& orig);
+  virtual ~NumberLayer();
   
-  static NumberSprite* create();
-  static Label* initNumbers();
+  static NumberLayer* initLayer();
+  virtual bool init() override;
+  CREATE_FUNC(NumberLayer);
 private:
-
+  Sprite *_holder;
+  Label *_value;
 };
 
 #endif /* NUMBERSPRITE_H */

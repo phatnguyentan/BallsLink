@@ -15,7 +15,7 @@
 #define SCENECONTROLLER_H
 
 #include "BaseController.h"
-#include "Scenes/MainScene/PlayLayer.h"
+#include "Scenes/MainScene/PlayScene.h"
 
 
 class SceneController : public BaseController{

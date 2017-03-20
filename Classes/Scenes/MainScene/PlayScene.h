@@ -11,24 +11,24 @@
  * Created on March 16, 2017, 5:47 PM
  */
 
-#ifndef PLAYLAYER_H
-#define PLAYLAYER_H
+#ifndef PLAYSCENE_H
+#define PLAYSCENE_H
 
 #include "cocos2d.h"
-#include "NumberSprite.h"
+#include "../../Layers/MainLayer/NumberLayer.h"
+#include "../../Layers/MainLayer/PanelLayer.h"
 USING_NS_CC;
 
-class PlayLayer : public Layer {
+class PlayScene : public Scene {
 public:
-  PlayLayer();
-  PlayLayer(const PlayLayer& orig);
-  virtual ~PlayLayer();
+  PlayScene();
+  PlayScene(const PlayScene& orig);
+  virtual ~PlayScene();
   
   static Scene* createScene();
-  virtual bool init() override;
-  CREATE_FUNC(PlayLayer);
+  CREATE_FUNC(PlayScene);
 private:
-  Vector<NumberSprite*> _matrix;
+  Vector<NumberLayer*> _matrix;
   int _width;
   int _height;
   float _matrixLeftBottomX;
