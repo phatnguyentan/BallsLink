@@ -16,6 +16,7 @@
 
 #include "NumberLayer.h"
 #include "../../Maps/Chap.h"
+#include "../../Maps/MyTMXLayer.h"
 #include "../BaseLayer.h"
 
 class PanelLayer : public BaseLayer{
@@ -25,6 +26,7 @@ public:
   virtual ~PanelLayer();
   
   virtual bool init() override;
+  void setTiledMap();
   CREATE_FUNC(PanelLayer);
 private:
   Chap* _chap;

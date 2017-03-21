@@ -14,6 +14,11 @@
 #include "PanelLayer.h"
 #include "Maps/Chap.h"
 
+enum 
+{
+    kTagTileMap
+};
+
 
 PanelLayer::PanelLayer() {
 }
@@ -27,12 +32,21 @@ PanelLayer::~PanelLayer() {
 bool PanelLayer::init() {
   _chap = Chap::getInstance();
   _chap->init();
+  setTiledMap();
   
-  for (int row = 1; row <= 3; row++) {
-    auto number = NumberLayer::initLayer();
-    number->setPosition(Vec2(row * 100, row * 50));
-    addChild(number);
-  }
+//  for (int row = 1; row <= 3; row++) {
+//    auto number = NumberLayer::initLayer();
+//    number->setPosition(Vec2(row * 100, row * 50));
+//    addChild(number);
+//  }
   
   return true;
+}
+
+void PanelLayer::setTiledMap() {
+  auto map = TMXTiledMap::create("maps/chap1.tmx");
+  auto main = (MyTMXLayer*) map->getLayer("main");
+  main->centerWidth(50);
+  
+  addChild(map, 0, kTagTileMap);
 }

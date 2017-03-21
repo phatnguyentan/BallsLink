@@ -150,6 +150,7 @@ set(GAME_SRC
   Classes/Layers/MainLayer/PanelLayer.cpp
   Classes/Layers/BaseLayer.cpp
   Classes/Maps/Chap.cpp
+  Classes/Maps/MyTMXLayer.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -164,6 +165,7 @@ set(GAME_HEADERS
   Classes/Layers/MainLayer/PanelLayer.h
   Classes/Layers/BaseLayer.h
   Classes/Maps/Chap.h
+  Classes/Maps/MyTMXLayer.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
