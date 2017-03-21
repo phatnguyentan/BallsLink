@@ -14,12 +14,12 @@
 #ifndef PLAYSCENE_H
 #define PLAYSCENE_H
 
-#include "cocos2d.h"
 #include "../../Layers/MainLayer/NumberLayer.h"
 #include "../../Layers/MainLayer/PanelLayer.h"
-USING_NS_CC;
+#include "../BaseScene.h"
 
-class PlayScene : public Scene {
+
+class PlayScene : public BaseScene {
 public:
   PlayScene();
   PlayScene(const PlayScene& orig);

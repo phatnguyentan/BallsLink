@@ -145,8 +145,10 @@ set(GAME_SRC
   Classes/Controllers/BaseController.cpp
   Classes/Controllers/SceneController.cpp
   Classes/Scenes/MainScene/PlayScene.cpp
+  Classes/Scenes/BaseScene.cpp
   Classes/Layers/MainLayer/NumberLayer.cpp
   Classes/Layers/MainLayer/PanelLayer.cpp
+  Classes/Layers/BaseLayer.cpp
   Classes/Maps/Chap.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
@@ -157,8 +159,10 @@ set(GAME_HEADERS
   Classes/Controllers/BaseController.h
   Classes/Controllers/SceneController.h
   Classes/Scenes/MainScene/PlayScene.h
+  Classes/Scenes/BaseScene.h
   Classes/Layers/MainLayer/NumberLayer.h
   Classes/Layers/MainLayer/PanelLayer.h
+  Classes/Layers/BaseLayer.h
   Classes/Maps/Chap.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )

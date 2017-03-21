@@ -13,11 +13,9 @@
 
 #ifndef NUMBERLAYER_H
 #define NUMBERLAYER_H
+#include "../BaseLayer.h"
 
-#include "cocos2d.h"
-USING_NS_CC;
-
-class NumberLayer :  public Layer {
+class NumberLayer : public BaseLayer {
 public:
   NumberLayer();
   NumberLayer(const NumberLayer& orig);

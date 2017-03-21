@@ -14,12 +14,11 @@
 #ifndef PANELLAYER_H
 #define PANELLAYER_H
 
-#include "cocos2d.h"
 #include "NumberLayer.h"
 #include "../../Maps/Chap.h"
-USING_NS_CC;
+#include "../BaseLayer.h"
 
-class PanelLayer : public Layer{
+class PanelLayer : public BaseLayer{
 public:
   PanelLayer();
   PanelLayer(const PanelLayer& orig);
