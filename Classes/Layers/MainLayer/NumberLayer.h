@@ -20,13 +20,18 @@ public:
   NumberLayer();
   NumberLayer(const NumberLayer& orig);
   virtual ~NumberLayer();
-  
-  static NumberLayer* initLayer();
+
   virtual bool init() override;
+  void initEvent();
+  void onTouchMoved(Touch *touch, Event *event);
+  static void insertNumberInto(int heigth, int width, Node *node);
+  bool onTouchBegan(Touch *touch, Event *event);
   CREATE_FUNC(NumberLayer);
 private:
   Sprite *_holder;
   Label *_value;
+  SpriteBatchNode *_batch;
+  bool _touch = false;
 };
 
 #endif /* NUMBERSPRITE_H */

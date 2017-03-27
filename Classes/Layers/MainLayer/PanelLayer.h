@@ -26,7 +26,7 @@ public:
   virtual ~PanelLayer();
   
   virtual bool init() override;
-  void setTiledMap();
+  void initTiledMap();
   CREATE_FUNC(PanelLayer);
 private:
   Chap* _chap;
