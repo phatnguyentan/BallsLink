@@ -14,6 +14,7 @@
 #ifndef NUMBERLAYER_H
 #define NUMBERLAYER_H
 #include "../BaseLayer.h"
+#include "../../Maps/MyTMXLayer.h"
 
 class NumberLayer : public BaseLayer {
 public:
@@ -23,8 +24,9 @@ public:
 
   virtual bool init() override;
   void initEvent();
-  void onTouchMoved(Touch *touch, Event *event);
-  static void insertNumberInto(int heigth, int width, Node *node);
+  
+  static void insertNumberInto(MyTMXLayer *map, Node *node, int tag);
+  void onPanelTouchMoved(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
   CREATE_FUNC(NumberLayer);
 private:

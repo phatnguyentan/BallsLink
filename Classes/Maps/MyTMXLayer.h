@@ -15,7 +15,7 @@
 #define MYTMXLAYER_H
 
 #include "cocos2d.h"
-#include "../Layers/MainLayer/NumberLayer.h"
+
 USING_NS_CC;
 
 class MyTMXLayer : TMXLayer {
@@ -24,8 +24,6 @@ public:
   MyTMXLayer(const MyTMXLayer& orig);
   virtual ~MyTMXLayer();
   
-  void centerWidthWithHeight(float h);
-  void insertNumbers();
   const Size& getLayerSize() const {return TMXLayer::getLayerSize();};
 private:
 

@@ -27,17 +27,17 @@ MyTMXLayer::MyTMXLayer(const MyTMXLayer& orig) {
 MyTMXLayer::~MyTMXLayer() {
 }
 
-void MyTMXLayer::centerWidthWithHeight(float h = 10) {
-  auto director = Director::getInstance();
-  auto winSize = director->getWinSize();
-  auto width = getLayerSize().width * getMapTileSize().width;
-  setPosition(Vec2(winSize.width - width, h));
-}
-
-void MyTMXLayer::insertNumbers() {
-  auto tile = getTileAt(Vec2(0, 1));
-  auto pos = tile->getPosition();
-}
+//void MyTMXLayer::centerWidthWithHeight(float h = 10) {
+//  auto director = Director::getInstance();
+//  auto winSize = director->getWinSize();
+//  auto width = getLayerSize().width * getMapTileSize().width;
+//  setPosition(Vec2(winSize.width - width, h));
+//}
+//
+//void MyTMXLayer::insertNumbers() {
+//  auto tile = getTileAt(Vec2(0, 1));
+//  auto pos = tile->getPosition();
+//}
 
 //const Size& MyTMXLayer::getLayerSize() const{
 //  return TMXLayer::getLayerSize();

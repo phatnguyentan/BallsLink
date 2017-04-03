@@ -27,9 +27,15 @@ public:
   
   virtual bool init() override;
   void initTiledMap();
+  void initEvent();
+  void onTouchMoved(Touch *touch, Event *event);
+  bool onTouchBegan(Touch *touch, Event *event);
   CREATE_FUNC(PanelLayer);
+  
+  Vector<NumberLayer*> _numberLayers;
 private:
   Chap* _chap;
+  
 };
 
 #endif /* PANELLAYER_H */
