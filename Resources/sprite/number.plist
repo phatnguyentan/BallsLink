@@ -4,18 +4,33 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Rec.png</key>
+            <key>cir_silver.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{41,41}</string>
+                <string>{61,66}</string>
                 <key>spriteSourceSize</key>
-                <string>{41,41}</string>
+                <string>{61,66}</string>
                 <key>textureRect</key>
-                <string>{{0,0},{41,41}}</string>
+                <string>{{84,1},{61,66}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>rec.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{81,81}</string>
+                <key>spriteSourceSize</key>
+                <string>{81,81}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{81,81}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -31,9 +46,9 @@
             <key>realTextureFileName</key>
             <string>number.png</string>
             <key>size</key>
-            <string>{41,41}</string>
+            <string>{146,83}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:000f9c87aa54fca6d9df665ca16282ef:a78cb5d92b0bbd8ac1183f01e2dd1582:d500031a6472c6b000cd39ee9d0775a8$</string>
+            <string>$TexturePacker:SmartUpdate:9b9af9152695b801a92be7dcee91e8f9:d9bcc4d7f5b0f195d223bb8d007f1f74:d500031a6472c6b000cd39ee9d0775a8$</string>
             <key>textureFileName</key>
             <string>number.png</string>
         </dict>

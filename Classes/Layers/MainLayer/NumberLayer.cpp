@@ -21,7 +21,7 @@ enum
     kTagNumberLayer,
     kTagBatch,
     kTagHolder,
-    kTagNumber
+    kTagSprite
 };
 
 static const char *numberNormal[TOTAL_NUMBER_NORMAL] = {
@@ -38,53 +38,23 @@ NumberLayer::NumberLayer(const NumberLayer& orig) {
 NumberLayer::~NumberLayer() {
 }
 
-
-static Vector<NumberLayer*> _numberLayers;
-void NumberLayer::insertNumberInto(MyTMXLayer *map, Node* node, int tag) {
-//  for (int i = 0; i < 8; i++) {
-//    for(int j = 0; j < 8; j++) {
-//      NumberLayer *layer = NumberLayer::create();
-//      layer->setAnchorPoint(Vec2(0, 0));
-//      layer->setPosition(Vec2(50 * i, 50 * j));
-//      node->addChild(layer, 1, kTagNumberLayer);
-//      node->_numberLayers.pushBack(layer);
-//    }
-//  }
-}
-
 bool NumberLayer::init() {
   _batch = SpriteBatchNode::create("sprite/number.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
-  _holder = Sprite::createWithSpriteFrameName("Rec.png");
+  _holder = Sprite::createWithSpriteFrameName("rec.png");
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
+  _holder->setOpacity(30);
   _batch->addChild(_holder, 0, kTagHolder);
   
-  
-  auto index = rand() % TOTAL_NUMBER_NORMAL;
-  _value = Label::createWithTTF(numberNormal[index], "fonts/arial.ttf", 20);
-  _value->setPosition(Vec2(0, 0));
-  _value->setTextColor(Color4B(0, 0, 0, 255));
-  _value->setAnchorPoint(Vec2(-0.9, -0.2));
-  _batch->addChild(_value->getLetter(0), 1, kTagNumber);
+//  auto index = rand() % TOTAL_NUMBER_NORMAL;
+//  _value = Label::createWithTTF(numberNormal[index], "fonts/arial.ttf", 20);
+
   addChild(_batch, 0, kTagBatch);
   return true;
 }
 
-void NumberLayer::initEvent() {
-//  auto eventListener = EventListenerTouchOneByOne::create();
-////  eventListener->setSwallowTouches(true);
-//  eventListener->onTouchBegan = CC_CALLBACK_2(NumberLayer::onTouchBegan, this);
-//  eventListener->onTouchMoved = CC_CALLBACK_2(NumberLayer::onTouchMoved, this);
-////  eventListener->onTouchEnded = CC_CALLBACK_2(NumberLayer::onTouchEnded, this);
-//  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, _batch);
-}
-
 void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
-//  auto target = static_cast<Layer*>(event->getCurrentTarget());
-//  //Move the position of current button sprite
-//  target->setPosition(target->getPosition() + touch->getDelta());
-//
   Vec2 locationInNode = this->convertToNodeSpace(touch->getLocation());
   auto holder = this->getChildByTag(kTagBatch)->getChildByTag(kTagHolder);
   Size s = holder->getContentSize();
@@ -92,24 +62,72 @@ void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   if (rect.containsPoint(locationInNode))
   {
       log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-      holder->setOpacity(180);
+      log("current index: %i", this->index);
+      if (this->next) log("next index: %i", this->next->index);
+      if (this->prev) log("prev index: %i", this->prev->index);
+//      holder->setOpacity(180);
+      this->removeSprite();
+//      this->fill();
   }
-//  this->setPosition(Vec2(300,300));
 }
 
-bool NumberLayer::onTouchBegan(Touch *touch, Event *event) {
-//  _touch = true;
-  auto target = static_cast<SpriteBatchNode*>(event->getCurrentTarget());
-  auto holder = target->getChildByTag(kTagHolder);
-  Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
-  Size s = holder->getContentSize();
-  Rect rect = Rect(0, 0, s.width, s.height);
-  if (rect.containsPoint(locationInNode))
-  {
-      log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-      holder->setOpacity(180);
-      return true;
+void NumberLayer::fill() {
+  if (isFill()) {
+    log("action");
+    if (this->next) {
+      auto nextSprite = (Sprite*)this->next->getChildByTag(kTagBatch)->getChildByTag(kTagSprite);
+      if (nextSprite) {
+        log("down sprite");
+        createSprite(nextSprite);
+        this->next->removeSprite();
+        if (this->prev) this->prev->fill();
+      } else {
+        log("fill next");
+        this->next->fill();
+      }
+    } else {
+      log("add sprite");
+      createSprite();
+      this->prev->fill();
+    }
+  } else {
+    log("stop");
   }
+}
+
+
+bool NumberLayer::isFill() {
+  auto sprite = this->getChildByTag(kTagBatch)->getChildByTag(kTagSprite);
+  if(!sprite) return true;
   return false;
 }
 
+void NumberLayer::createSprite(Sprite *sprite) {
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
+  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
+  _sprite->setPosition(Vec2(sprite->getPositionX(), sprite->getPositionY() + 50));
+  auto moveTo = MoveTo::create(0.2, Vec2(0, 0));
+  auto seq = Sequence::create(moveTo, nullptr);
+  _sprite->runAction(seq);
+  this->addSprite();
+}
+
+void NumberLayer::createSprite() {
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
+  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
+  _sprite->setPosition(Vec2(0, 100 * this->index));
+  auto moveTo = MoveTo::create(0.3, Vec2(0, 0));
+  auto seq = Sequence::create(moveTo, nullptr);
+  _sprite->runAction(seq);
+  this->addSprite();
+}
+
+void NumberLayer::removeSprite() {
+  this->_batch->removeChildByTag(kTagSprite);
+}
+
+void NumberLayer::addSprite() {
+  this->_batch->addChild(_sprite, 1, kTagSprite);
+}
