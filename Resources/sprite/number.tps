@@ -76,7 +76,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -104,7 +104,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -148,10 +148,6 @@
         <key>dataFileNames</key>
         <map type="GFileNameMap">
             <key>data</key>
-            <struct type="DataFile">
-                <key>name</key>
-                <filename>number.plist</filename>
-            </struct>
             <key>header</key>
             <key>source</key>
             <struct type="DataFile">
@@ -173,7 +169,7 @@
             <string></string>
         </struct>
         <key>autoAliasEnabled</key>
-        <false/>
+        <true/>
         <key>trimSpriteNames</key>
         <false/>
         <key>prependSmartFolderName</key>
@@ -185,13 +181,13 @@
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -203,37 +199,37 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../Downloads/Background.png</key>
+            <key type="filename">../../../../Downloads/cir_silver.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>100,98,201,196</rect>
+                <rect>15,17,31,33</rect>
                 <key>scale9Paddings</key>
-                <rect>100,98,201,196</rect>
+                <rect>15,17,31,33</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Downloads/Rec.png</key>
+            <key type="filename">../../../../Downloads/rec.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>10,10,21,21</rect>
+                <rect>20,20,41,41</rect>
                 <key>scale9Paddings</key>
-                <rect>10,10,21,21</rect>
+                <rect>20,20,41,41</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../Downloads/Rec.png</filename>
-            <filename>../../../../Downloads/Background.png</filename>
+            <filename>../../../../Downloads/rec.png</filename>
+            <filename>../../../../Downloads/cir_silver.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

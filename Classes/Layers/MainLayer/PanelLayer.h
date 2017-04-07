@@ -24,12 +24,13 @@ public:
   PanelLayer();
   PanelLayer(const PanelLayer& orig);
   virtual ~PanelLayer();
-  
   virtual bool init() override;
   void initTiledMap();
   void initEvent();
   void onTouchMoved(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
+  void center();
+  
   CREATE_FUNC(PanelLayer);
   
   Vector<NumberLayer*> _numberLayers;

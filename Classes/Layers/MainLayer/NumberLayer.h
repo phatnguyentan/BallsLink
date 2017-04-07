@@ -23,15 +23,23 @@ public:
   virtual ~NumberLayer();
 
   virtual bool init() override;
-  void initEvent();
+  void fill();
+  void removeSprite();
+  void addSprite();
+  bool isFill();
+  void afterMove(NumberLayer *layer);
   
-  static void insertNumberInto(MyTMXLayer *map, Node *node, int tag);
   void onPanelTouchMoved(Touch *touch, Event *event);
-  bool onTouchBegan(Touch *touch, Event *event);
   CREATE_FUNC(NumberLayer);
+  
+  NumberLayer *next;
+  NumberLayer *prev;
+  int index;
 private:
   Sprite *_holder;
   Label *_value;
+  Sprite *_sprite;
+  
   SpriteBatchNode *_batch;
   bool _touch = false;
 };

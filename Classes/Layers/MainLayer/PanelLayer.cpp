@@ -43,21 +43,6 @@ bool PanelLayer::init() {
   return true;
 }
 
-void PanelLayer::initTiledMap() {
-  auto map = TMXTiledMap::create("maps/chap1.tmx");
-  MyTMXLayer *main = (MyTMXLayer*) map->getLayer("main");
-//  NumberLayer::insertNumberInto(main, this, kTagNumberLayer);
-  for (int i = 0; i < 8; i++) {
-    for(int j = 0; j < 8; j++) {
-      NumberLayer *layer = NumberLayer::create();
-      layer->setAnchorPoint(Vec2(0, 0));
-      layer->setPosition(Vec2(50 * i, 50 * j));
-      this->addChild(layer, 1, kTagNumberLayer);
-      this->_numberLayers.pushBack(layer);
-    }
-  }
-}
-
 void PanelLayer::initEvent() {
   auto eventListener = EventListenerTouchOneByOne::create();
   eventListener->onTouchBegan = CC_CALLBACK_2(PanelLayer::onTouchBegan, this);
@@ -76,7 +61,56 @@ void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->removeSprite();
+  }
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->fill();
+  }
   auto target = static_cast<NumberLayer*>(event->getCurrentTarget());
   target->onPanelTouchMoved(touch, event);
   return true;
+}
+
+void PanelLayer::initTiledMap() {
+//  auto map = TMXTiledMap::create("maps/chap1.tmx");
+//  MyTMXLayer *main = (MyTMXLayer*) map->getLayer("main");
+  center();
+  for (int i = 0; i < 8; i++) {
+    for(int j = 0; j < 8; j++) {
+      NumberLayer *layer = NumberLayer::create();
+      if(j == 0) {
+        layer->prev = NULL;
+        layer->next = NULL;
+      } else if (j > 0 && j < 7){
+        layer->prev = this->_numberLayers.at(8 * i + j -1);
+        auto prev = layer->prev;
+        prev->next = layer;
+      } else if (j == 7) {
+        layer->prev = this->_numberLayers.at(8 * i + j -1);
+        auto prev = layer->prev;
+        prev->next = layer;
+        layer->next = NULL;
+      }
+      layer->setAnchorPoint(Vec2(0, 0));
+      layer->setPosition(Vec2(50 * i, 50 * j));
+      layer->index = (int)this->_numberLayers.size();
+      this->addChild(layer, 1, kTagNumberLayer);
+      this->_numberLayers.pushBack(layer);
+    }
+  }
+  
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->fill();
+  }
+//  this->_numberLayers.at(0)->fill();
+//  this->_numberLayers.at(1)->fill();
+//  this->_numberLayers.at(2)->fill();
+//  this->_numberLayers.at(3)->fill();
+  
+//  log("layer 1 index: %i", this->_numberLayers.at(1)->index);
+}
+
+void PanelLayer::center() {
+  setColor(Color3B::WHITE);
 }

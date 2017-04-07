@@ -21,7 +21,7 @@ enum
     kTagNumberLayer,
     kTagBatch,
     kTagHolder,
-    kTagNumber
+    kTagSprite
 };
 
 static const char *numberNormal[TOTAL_NUMBER_NORMAL] = {
@@ -38,53 +38,23 @@ NumberLayer::NumberLayer(const NumberLayer& orig) {
 NumberLayer::~NumberLayer() {
 }
 
-
-static Vector<NumberLayer*> _numberLayers;
-void NumberLayer::insertNumberInto(MyTMXLayer *map, Node* node, int tag) {
-//  for (int i = 0; i < 8; i++) {
-//    for(int j = 0; j < 8; j++) {
-//      NumberLayer *layer = NumberLayer::create();
-//      layer->setAnchorPoint(Vec2(0, 0));
-//      layer->setPosition(Vec2(50 * i, 50 * j));
-//      node->addChild(layer, 1, kTagNumberLayer);
-//      node->_numberLayers.pushBack(layer);
-//    }
-//  }
-}
-
 bool NumberLayer::init() {
   _batch = SpriteBatchNode::create("sprite/number.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
-  _holder = Sprite::createWithSpriteFrameName("Rec.png");
+  _holder = Sprite::createWithSpriteFrameName("rec.png");
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
+  _holder->setOpacity(30);
   _batch->addChild(_holder, 0, kTagHolder);
   
-  
-  auto index = rand() % TOTAL_NUMBER_NORMAL;
-  _value = Label::createWithTTF(numberNormal[index], "fonts/arial.ttf", 20);
-  _value->setPosition(Vec2(0, 0));
-  _value->setTextColor(Color4B(0, 0, 0, 255));
-  _value->setAnchorPoint(Vec2(-0.9, -0.2));
-  _batch->addChild(_value->getLetter(0), 1, kTagNumber);
+//  auto index = rand() % TOTAL_NUMBER_NORMAL;
+//  _value = Label::createWithTTF(numberNormal[index], "fonts/arial.ttf", 20);
+
   addChild(_batch, 0, kTagBatch);
   return true;
 }
 
-void NumberLayer::initEvent() {
-//  auto eventListener = EventListenerTouchOneByOne::create();
-////  eventListener->setSwallowTouches(true);
-//  eventListener->onTouchBegan = CC_CALLBACK_2(NumberLayer::onTouchBegan, this);
-//  eventListener->onTouchMoved = CC_CALLBACK_2(NumberLayer::onTouchMoved, this);
-////  eventListener->onTouchEnded = CC_CALLBACK_2(NumberLayer::onTouchEnded, this);
-//  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, _batch);
-}
-
 void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
-//  auto target = static_cast<Layer*>(event->getCurrentTarget());
-//  //Move the position of current button sprite
-//  target->setPosition(target->getPosition() + touch->getDelta());
-//
   Vec2 locationInNode = this->convertToNodeSpace(touch->getLocation());
   auto holder = this->getChildByTag(kTagBatch)->getChildByTag(kTagHolder);
   Size s = holder->getContentSize();
@@ -92,24 +62,87 @@ void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   if (rect.containsPoint(locationInNode))
   {
       log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
+      log("current index: %i", this->index);
+      if (this->next) log("next index: %i", this->next->index);
+      if (this->prev) log("prev index: %i", this->prev->index);
       holder->setOpacity(180);
   }
-//  this->setPosition(Vec2(300,300));
 }
 
-bool NumberLayer::onTouchBegan(Touch *touch, Event *event) {
-//  _touch = true;
-  auto target = static_cast<SpriteBatchNode*>(event->getCurrentTarget());
-  auto holder = target->getChildByTag(kTagHolder);
-  Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
-  Size s = holder->getContentSize();
-  Rect rect = Rect(0, 0, s.width, s.height);
-  if (rect.containsPoint(locationInNode))
-  {
-      log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-      holder->setOpacity(180);
+void NumberLayer::fill() {
+  auto sprite = this->getChildByTag(kTagBatch)->getChildByTag(kTagSprite);
+  if (sprite) {
+    log("exist");
+  } else {
+    if (this->next) {
+      if (this->next->getChildByTag(kTagBatch)->getChildByTag(kTagSprite)) {
+        log("down");
+        SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+        _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
+        _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
+        _sprite->setPosition(Vec2(0, 100 * this->index));
+        auto moveTo = MoveTo::create(0.5, Vec2(0, 0));
+        
+        auto callback = CallFuncN::create(
+                  [&](Node* sender) {
+          if (this->prev) this->prev->fill();
+        });
+        auto seq = Sequence::create(callback, moveTo, nullptr);
+        _sprite->runAction(seq);
+        this->next->removeSprite();
+        this->addSprite();
+        if (this->prev) this->prev->fill();
+      } else {
+        log("fill");
+        this->next->fill();
+      }
+    } else {
+      log("add");
+      SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+      _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
+      _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
+      _sprite->setPosition(Vec2(0, 100 * this->index));
+      this->addSprite();
+      this->prev->fill();
+      
+//      auto holder = this->getChildByTag(kTagBatch)->getChildByTag(kTagHolder);
+//      auto moveTo = MoveTo::create(0.5, Vec2(holder->getPositionX(), holder->getPositionY()));
+//      
+//      auto callback = CallFuncN::create(
+//		[&](Node* sender) {
+//        this->removeChildByTag(kTagSprite);
+//        this->_batch->addChild(this->_sprite, 1, kTagSprite);
+//        log("fill 1");
+//        this->prev->fill();
+//      });
+//
+//      auto seq = Sequence::create(callback, moveTo, nullptr);
+//      _sprite->runAction(seq);
+//      addChild(_sprite, 1, kTagSprite);
+    }
+  }
+}
+
+
+bool NumberLayer::isFill() {
+  if(this->prev) {
+    if (!this->prev->getChildByTag(kTagBatch)->getChildByTag(kTagSprite)) {
       return true;
+    }
+    return this->prev->isFill();
+  } else {
+    if (!this->getChildByTag(kTagBatch)->getChildByTag(kTagSprite)) {
+      return true;
+    } else {
+      return false;
+    }
   }
-  return false;
 }
 
+void NumberLayer::removeSprite() {
+  this->_batch->removeChildByTag(kTagSprite);
+}
+
+void NumberLayer::addSprite() {
+  this->_batch->addChild(_sprite, 1, kTagSprite);
+}
