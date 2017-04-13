@@ -19,7 +19,7 @@
 #include "../../Maps/MyTMXLayer.h"
 #include "../BaseLayer.h"
 
-class PanelLayer : public BaseLayer{
+class PanelLayer : public BaseLayer {
 public:
   PanelLayer();
   PanelLayer(const PanelLayer& orig);
@@ -28,8 +28,10 @@ public:
   void initTiledMap();
   void initEvent();
   void onTouchMoved(Touch *touch, Event *event);
+  void onTouchEnded(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
   void center();
+  void initBg();
   
   CREATE_FUNC(PanelLayer);
   

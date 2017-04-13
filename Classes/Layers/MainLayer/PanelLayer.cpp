@@ -16,11 +16,12 @@
 
 enum 
 {
+    kTagBg,
+    kTagTileMap,
     kTagNumberLayer,
     kTagBatch,
     kTagHolder,
     kTagNumber,
-    kTagTileMap
 };
 
 
@@ -37,6 +38,7 @@ PanelLayer::~PanelLayer() {
 bool PanelLayer::init() {
   _chap = Chap::getInstance();
   _chap->init();
+  initBg();
   initTiledMap();
   initEvent();
   
@@ -47,7 +49,7 @@ void PanelLayer::initEvent() {
   auto eventListener = EventListenerTouchOneByOne::create();
   eventListener->onTouchBegan = CC_CALLBACK_2(PanelLayer::onTouchBegan, this);
   eventListener->onTouchMoved = CC_CALLBACK_2(PanelLayer::onTouchMoved, this);
-//  eventListener->onTouchEnded = CC_CALLBACK_2(NumberLayer::onTouchEnded, this);
+  eventListener->onTouchEnded = CC_CALLBACK_2(NumberLayer::onTouchEnded, this);
   this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, this->_numberLayers.at(0));
   for (int i = 1; i < this->_numberLayers.size(); i++) {
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener->clone(), this->_numberLayers.at(i));
@@ -55,26 +57,34 @@ void PanelLayer::initEvent() {
 }
 
 void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
-//  NumberLayer::onPanelTouchMoved(touch, event);
   auto target = static_cast<NumberLayer*>(event->getCurrentTarget());
   target->onPanelTouchMoved(touch, event);
-  for (NumberLayer *layer : this->_numberLayers) {
-    layer->fill();
-  }
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
   auto target = static_cast<NumberLayer*>(event->getCurrentTarget());
   target->onPanelTouchMoved(touch, event);
-  for (NumberLayer *layer : this->_numberLayers) {
-    layer->fill();
-  }
   return true;
 }
 
+void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
+  for (NumberLayer *layer : this->_numberLayers) {
+    if(layer->choice == true) {
+      log("remove");
+      layer->removeSprite();
+    }
+  }
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->fill();
+  }
+  
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->choice = false;
+  }
+}
+
+
 void PanelLayer::initTiledMap() {
-//  auto map = TMXTiledMap::create("maps/chap1.tmx");
-//  MyTMXLayer *main = (MyTMXLayer*) map->getLayer("main");
   center();
   for (int i = 0; i < 8; i++) {
     for(int j = 0; j < 8; j++) {
@@ -93,18 +103,29 @@ void PanelLayer::initTiledMap() {
         layer->next = NULL;
       }
       layer->setAnchorPoint(Vec2(0, 0));
-      layer->setPosition(Vec2(50 * i, 50 * j));
+      layer->setPosition(Vec2(50 * i * 1.3, 50 * j * 1.3));
       layer->index = (int)this->_numberLayers.size();
+      layer->setScale(1.3);
       this->addChild(layer, 1, kTagNumberLayer);
       this->_numberLayers.pushBack(layer);
     }
-  }
-  
+  } 
   for (NumberLayer *layer : this->_numberLayers) {
     layer->fill();
   }
   
 //  log("layer 1 index: %i", this->_numberLayers.at(1)->index);
+}
+
+void PanelLayer::initBg() {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  auto sprite = Sprite::create("bgPanel.png");
+  sprite->setAnchorPoint(Vec2(0, 0));
+  sprite->setPosition(Vec2(0, 0));
+  float scale = visibleSize.width / sprite->getContentSize().width;
+  sprite->setScale(scale);
+  sprite->setOpacity(70);
+  addChild(sprite, kTagBg);
 }
 
 void PanelLayer::center() {

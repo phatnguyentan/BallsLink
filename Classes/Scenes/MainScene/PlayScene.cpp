@@ -16,6 +16,11 @@
 #define MATRIX_WIDTH (8)
 #define MATRIX_HEIGHT (8)
 
+enum 
+{
+    kTagBg,
+};
+
 PlayScene::PlayScene()
 {
   _height = MATRIX_HEIGHT;
@@ -30,9 +35,17 @@ PlayScene::~PlayScene() {
 
 Scene *PlayScene::createScene()
 {
-    auto scene = PlayScene::create();
-    auto panelLayer = PanelLayer::create();
-    scene->addChild(panelLayer);
-    return scene;
+  auto scene = PlayScene::create();
+  auto sprite = Sprite::create("bg.png");
+  sprite->setAnchorPoint(Vec2(0, 0));
+  sprite->setPosition(Vec2(0, 0));
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  float scale = MAX(visibleSize.width / sprite->getContentSize().width, visibleSize.height / sprite->getContentSize().height);
+  sprite->setScale(scale);
+  scene->addChild(sprite, kTagBg);
+
+  auto panelLayer = PanelLayer::create();
+  scene->addChild(panelLayer);
+  return scene;
 }
 

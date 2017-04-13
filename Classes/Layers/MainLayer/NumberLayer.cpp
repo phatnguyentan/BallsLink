@@ -33,6 +33,7 @@ NumberLayer::NumberLayer() {
 }
 
 NumberLayer::NumberLayer(const NumberLayer& orig) {
+  choice = false;
 }
 
 NumberLayer::~NumberLayer() {
@@ -61,37 +62,34 @@ void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   Rect rect = Rect(0, 0, s.width, s.height);
   if (rect.containsPoint(locationInNode))
   {
-      log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-      log("current index: %i", this->index);
-      if (this->next) log("next index: %i", this->next->index);
-      if (this->prev) log("prev index: %i", this->prev->index);
-//      holder->setOpacity(180);
-      this->removeSprite();
-//      this->fill();
+    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
+    choice = true;
+    _sprite->setScale(1.08);
+//  this->removeSprite();
   }
 }
 
 void NumberLayer::fill() {
   if (isFill()) {
-    log("action");
+//    log("action");
     if (this->next) {
       auto nextSprite = (Sprite*)this->next->getChildByTag(kTagBatch)->getChildByTag(kTagSprite);
       if (nextSprite) {
-        log("down sprite");
+//        log("down sprite");
         createSprite(nextSprite);
         this->next->removeSprite();
         if (this->prev) this->prev->fill();
       } else {
-        log("fill next");
+//        log("fill next");
         this->next->fill();
       }
     } else {
-      log("add sprite");
+//      log("add sprite");
       createSprite();
       this->prev->fill();
     }
   } else {
-    log("stop");
+//    log("stop");
   }
 }
 

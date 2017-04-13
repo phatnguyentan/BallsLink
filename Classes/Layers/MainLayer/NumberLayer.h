@@ -37,6 +37,8 @@ public:
   NumberLayer *next;
   NumberLayer *prev;
   int index;
+  bool choice = false;
+  
 private:
   Sprite *_holder;
   Label *_value;
