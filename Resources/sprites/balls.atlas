@@ -1,0 +1,40 @@
+
+balls.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+purple
+  rotate: false
+  xy: 1, 1
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+yellow
+  rotate: false
+  xy: 80, 1
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 159, 1
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+green
+  rotate: false
+  xy: 238, 1
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+red
+  rotate: false
+  xy: 317, 1
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1

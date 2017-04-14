@@ -144,11 +144,15 @@ set(GAME_SRC
   Classes/Controllers/ManagerController.cpp
   Classes/Controllers/BaseController.cpp
   Classes/Controllers/SceneController.cpp
-  Classes/Scenes/MainScene/PlayScene.cpp
   Classes/Scenes/BaseScene.cpp
+  Classes/Scenes/MainScene/PlayScene.cpp
+  Classes/Scenes/Test/TestScene.cpp
+  Classes/Layers/BaseLayer.cpp
   Classes/Layers/MainLayer/NumberLayer.cpp
   Classes/Layers/MainLayer/PanelLayer.cpp
-  Classes/Layers/BaseLayer.cpp
+  Classes/Layers/Test/TestLayer.cpp
+  Classes/Sprites/BaseSprite.cpp
+  Classes/Sprites/Ball/Ball.cpp
   Classes/Maps/Chap.cpp
   Classes/Maps/MyTMXLayer.cpp
   ${PLATFORM_SPECIFIC_SRC}
@@ -159,11 +163,15 @@ set(GAME_HEADERS
   Classes/Controllers/ManagerController.h
   Classes/Controllers/BaseController.h
   Classes/Controllers/SceneController.h
-  Classes/Scenes/MainScene/PlayScene.h
   Classes/Scenes/BaseScene.h
+  Classes/Scenes/MainScene/PlayScene.h
+  Classes/Scenes/Test/TestScene.h
+  Classes/Layers/BaseLayer.h
   Classes/Layers/MainLayer/NumberLayer.h
   Classes/Layers/MainLayer/PanelLayer.h
-  Classes/Layers/BaseLayer.h
+  Classes/Layers/Test/TestLayer.h
+  Classes/Sprites/BaseSprite.h
+  Classes/Sprites/Ball/Ball.h
   Classes/Maps/Chap.h
   Classes/Maps/MyTMXLayer.h
   ${PLATFORM_SPECIFIC_HEADERS}

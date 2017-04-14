@@ -40,8 +40,8 @@ NumberLayer::~NumberLayer() {
 }
 
 bool NumberLayer::init() {
-  _batch = SpriteBatchNode::create("sprite/number.png", 2);
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+  _batch = SpriteBatchNode::create("sprites/number.png", 2);
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
   _holder = Sprite::createWithSpriteFrameName("rec.png");
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
@@ -64,7 +64,7 @@ void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   {
     log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
     choice = true;
-    _sprite->setScale(1.08);
+    _sprite->setScale(1.1);
 //  this->removeSprite();
   }
 }
@@ -101,7 +101,7 @@ bool NumberLayer::isFill() {
 }
 
 void NumberLayer::createSprite(Sprite *sprite) {
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
   _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
   _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
   _sprite->setPosition(Vec2(sprite->getPositionX(), sprite->getPositionY() + 50));
@@ -112,7 +112,7 @@ void NumberLayer::createSprite(Sprite *sprite) {
 }
 
 void NumberLayer::createSprite() {
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite/number.plist");
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
   _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
   _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
   _sprite->setPosition(Vec2(0, 100 * this->index));

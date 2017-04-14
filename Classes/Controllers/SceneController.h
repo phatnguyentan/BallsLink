@@ -16,6 +16,7 @@
 
 #include "BaseController.h"
 #include "Scenes/MainScene/PlayScene.h"
+#include "Scenes/Test/TestScene.h"
 
 
 class SceneController : public BaseController{
