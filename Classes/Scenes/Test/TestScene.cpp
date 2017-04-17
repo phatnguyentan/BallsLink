@@ -25,16 +25,7 @@ TestScene::~TestScene() {
 Scene *TestScene::createScene()
 {
   auto scene = TestScene::create();
-//  auto sprite = Sprite::create("bg.png");
-//  sprite->setAnchorPoint(Vec2(0, 0));
-//  sprite->setPosition(Vec2(0, 0));
-//  scene->addChild(sprite);
-  
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto sprite = Sprite::createWithSpriteFrameName("purple.png");
-  sprite->setAnchorPoint(Vec2(0, 0));
-  sprite->setPosition(Vec2(0, 0));
-  scene->addChild(sprite);
-  
+  auto testLayer = TestLayer::create();
+  scene->addChild(testLayer);
   return scene;
 }

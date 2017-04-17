@@ -15,6 +15,8 @@
 #define TESTSCENE_H
 
 #include "../BaseScene.h"
+#include "../../Sprites/Ball/Ball.h"
+#include "../../Layers/Test/TestLayer.h"
 
 class TestScene : public BaseScene {
 public:

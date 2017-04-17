@@ -18,7 +18,7 @@
 USING_NS_CC;
 
 
-class BaseSprite : public SpriteBatchNode, public Sprite{
+class BaseSprite : public SpriteBatchNode {
 public:
   BaseSprite();
   BaseSprite(const BaseSprite& orig);

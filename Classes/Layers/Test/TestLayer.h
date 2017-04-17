@@ -15,14 +15,18 @@
 #define TESTLAYER_H
 
 #include "../BaseLayer.h"
+#include "../../Sprites/Ball/Ball.h"
 
-class TestLayer : BaseLayer {
+class TestLayer : public BaseLayer {
 public:
   TestLayer();
   TestLayer(const TestLayer& orig);
   virtual ~TestLayer();
   
   virtual bool init() override;
+  bool onTouchBegan(Touch *touch, Event *event);
+  void onTouchMoved(Touch *touch, Event *event);
+  void onTouchEnded(Touch *touch, Event *event);
   CREATE_FUNC(TestLayer);
 private:
 
