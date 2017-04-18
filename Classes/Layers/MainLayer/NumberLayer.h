@@ -15,6 +15,7 @@
 #define NUMBERLAYER_H
 #include "../BaseLayer.h"
 #include "../../Maps/MyTMXLayer.h"
+#include "../../Sprites/Ball/Ball.h"
 
 class NumberLayer : public BaseLayer {
 public:
@@ -40,7 +41,7 @@ public:
   bool choice = false;
   
 private:
-  Sprite *_holder;
+  LayerColor *_holder;
   Label *_value;
   Sprite *_sprite;
   

@@ -150,9 +150,11 @@ set(GAME_SRC
   Classes/Layers/BaseLayer.cpp
   Classes/Layers/MainLayer/NumberLayer.cpp
   Classes/Layers/MainLayer/PanelLayer.cpp
+  Classes/Layers/MainLayer/HolderLayer.cpp
   Classes/Layers/Test/TestLayer.cpp
   Classes/Sprites/BaseSprite.cpp
   Classes/Sprites/Ball/Ball.cpp
+  Classes/Core/Services/Service.cpp
   Classes/Maps/Chap.cpp
   Classes/Maps/MyTMXLayer.cpp
   ${PLATFORM_SPECIFIC_SRC}
@@ -172,6 +174,7 @@ set(GAME_HEADERS
   Classes/Layers/Test/TestLayer.h
   Classes/Sprites/BaseSprite.h
   Classes/Sprites/Ball/Ball.h
+  Classes/Core/Services/Service.h
   Classes/Maps/Chap.h
   Classes/Maps/MyTMXLayer.h
   ${PLATFORM_SPECIFIC_HEADERS}

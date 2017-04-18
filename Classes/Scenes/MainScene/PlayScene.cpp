@@ -39,10 +39,11 @@ Scene *PlayScene::createScene()
   auto sprite = Sprite::create("bg.png");
   sprite->setAnchorPoint(Vec2(0, 0));
   sprite->setPosition(Vec2(0, 0));
-  Size visibleSize = Director::getInstance()->getVisibleSize();
-  float scale = MAX(visibleSize.width / sprite->getContentSize().width, visibleSize.height / sprite->getContentSize().height);
-  sprite->setScale(scale);
+  auto service = Service::getInstance();
+  sprite->setScale(service->getScale(sprite->getContentSize()));
   scene->addChild(sprite, kTagBg);
+  
+  auto size = scene->getContentSize();
 
   auto panelLayer = PanelLayer::create();
   scene->addChild(panelLayer);

@@ -24,6 +24,12 @@ enum
     kTagNumber,
 };
 
+enum 
+{
+    kOrderBg,
+    kOrderNumberLayer,
+};
+
 
 
 PanelLayer::PanelLayer() {
@@ -40,7 +46,7 @@ bool PanelLayer::init() {
   _chap->init();
   initBg();
   initTiledMap();
-  initEvent();
+//  initEvent();
   
   return true;
 }
@@ -85,49 +91,42 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
 
 
 void PanelLayer::initTiledMap() {
-  center();
-  for (int i = 0; i < 8; i++) {
-    for(int j = 0; j < 8; j++) {
+  auto service = Service::getInstance();
+  auto length = service->getMapLength();
+  for (int i = 0; i < length; i++) {
+    for(int j = 0; j < length; j++) {
       NumberLayer *layer = NumberLayer::create();
       if(j == 0) {
         layer->prev = NULL;
         layer->next = NULL;
-      } else if (j > 0 && j < 7){
-        layer->prev = this->_numberLayers.at(8 * i + j -1);
+      } else if (j > 0 && j < length -1){
+        layer->prev = this->_numberLayers.at(length * i + j -1);
         auto prev = layer->prev;
         prev->next = layer;
-      } else if (j == 7) {
-        layer->prev = this->_numberLayers.at(8 * i + j -1);
+      } else if (j == length -1) {
+        layer->prev = this->_numberLayers.at(length * i + j -1);
         auto prev = layer->prev;
         prev->next = layer;
         layer->next = NULL;
       }
       layer->setAnchorPoint(Vec2(0, 0));
-      layer->setPosition(Vec2(50 * i * 1.3, 50 * j * 1.3));
+      auto scale = service->getScale();
+      layer->setPosition(Vec2(service->getElSize() * i * scale, service->getElSize() * j * scale));
       layer->index = (int)this->_numberLayers.size();
-      layer->setScale(1.3);
-      this->addChild(layer, 1, kTagNumberLayer);
+      this->addChild(layer, kOrderNumberLayer, kTagNumberLayer);
       this->_numberLayers.pushBack(layer);
     }
   } 
-  for (NumberLayer *layer : this->_numberLayers) {
-    layer->fill();
-  }
-  
-//  log("layer 1 index: %i", this->_numberLayers.at(1)->index);
+//  for (NumberLayer *layer : this->_numberLayers) {
+//    layer->fill();
+//  }
 }
 
 void PanelLayer::initBg() {
-  Size visibleSize = Director::getInstance()->getVisibleSize();
   auto sprite = Sprite::create("bgPanel.png");
   sprite->setAnchorPoint(Vec2(0, 0));
   sprite->setPosition(Vec2(0, 0));
-  float scale = visibleSize.width / sprite->getContentSize().width;
-  sprite->setScale(scale);
-  sprite->setOpacity(70);
-  addChild(sprite, kTagBg);
-}
-
-void PanelLayer::center() {
-  setColor(Color3B::WHITE);
+  auto service = Service::getInstance();
+  sprite->setScale(service->getScale(sprite->getContentSize()));
+  addChild(sprite, kOrderBg, kTagBg);
 }

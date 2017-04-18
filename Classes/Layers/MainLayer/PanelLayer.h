@@ -30,7 +30,6 @@ public:
   void onTouchMoved(Touch *touch, Event *event);
   void onTouchEnded(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
-  void center();
   void initBg();
   
   CREATE_FUNC(PanelLayer);

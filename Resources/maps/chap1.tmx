@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="50" tileheight="50" nextobjectid="38">
- <tileset firstgid="1" name="Background" tilewidth="50" tileheight="50" tilecount="56" columns="8">
+ <tileset firstgid="1" name="Background" tilewidth="50" tileheight="50" tilecount="1" columns="8">
   <image source="../Background.png" width="401" height="391"/>
  </tileset>
- <layer name="main" width="8" height="8">
+ <layer name="main" width="8" height="8" visible="0">
   <data encoding="csv">
 20,20,20,20,20,20,20,20,
 20,20,20,20,20,20,20,20,
@@ -13,6 +13,30 @@
 20,20,20,20,20,20,20,20,
 20,20,20,20,20,20,20,20,
 20,20,20,20,20,20,20,20
+</data>
+ </layer>
+ <layer name="Tile Layer 2" width="8" height="8" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="Copy of Tile Layer 2" width="8" height="8" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>
