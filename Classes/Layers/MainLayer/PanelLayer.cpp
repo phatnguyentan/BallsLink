@@ -46,7 +46,7 @@ bool PanelLayer::init() {
   _chap->init();
   initBg();
   initTiledMap();
-//  initEvent();
+  initEvent();
   
   return true;
 }
@@ -74,19 +74,19 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-  for (NumberLayer *layer : this->_numberLayers) {
-    if(layer->choice == true) {
-      log("remove");
-      layer->removeSprite();
-    }
-  }
-  for (NumberLayer *layer : this->_numberLayers) {
-    layer->fill();
-  }
-  
-  for (NumberLayer *layer : this->_numberLayers) {
-    layer->choice = false;
-  }
+//  for (NumberLayer *layer : this->_numberLayers) {
+//    if(layer->choice == true) {
+//      log("remove");
+//      layer->removeSprite();
+//    }
+//  }
+//  for (NumberLayer *layer : this->_numberLayers) {
+//    layer->fill();
+//  }
+//  
+//  for (NumberLayer *layer : this->_numberLayers) {
+//    layer->choice = false;
+//  }
 }
 
 
@@ -111,15 +111,18 @@ void PanelLayer::initTiledMap() {
       }
       layer->setAnchorPoint(Vec2(0, 0));
       auto scale = service->getScale();
-      layer->setPosition(Vec2(service->getElSize() * i * scale, service->getElSize() * j * scale));
+      layer->setPosition(Vec2(
+              service->getElSize() * i * scale + service->getPlayFrameX(), 
+              service->getElSize() * j * scale + service->getPlayFrameY()
+      ));
       layer->index = (int)this->_numberLayers.size();
       this->addChild(layer, kOrderNumberLayer, kTagNumberLayer);
       this->_numberLayers.pushBack(layer);
     }
   } 
-//  for (NumberLayer *layer : this->_numberLayers) {
-//    layer->fill();
-//  }
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->fill();
+  }
 }
 
 void PanelLayer::initBg() {

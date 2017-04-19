@@ -27,6 +27,7 @@ public:
   void fill();
   void removeSprite();
   void addSprite();
+  Ball* getSprite();
   void createSprite(Sprite *sprite);
   void createSprite();
   bool isFill();
@@ -45,7 +46,7 @@ private:
   Label *_value;
   Sprite *_sprite;
   
-  SpriteBatchNode *_batch;
+  Ball *_batch;
   bool _touch = false;
 };
 

@@ -45,5 +45,15 @@ int Service::getMapLength() {
 }
 
 int Service::getElSize() {
-  return 110;
+  return 117;
+}
+
+float Service::getPlayFrameX() {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  return visibleSize.width * 0.0275;
+}
+
+float Service::getPlayFrameY() {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  return visibleSize.height * 0.323;
 }
