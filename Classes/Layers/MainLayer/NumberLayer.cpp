@@ -51,7 +51,7 @@ bool NumberLayer::init() {
   auto service = Service::getInstance();
   auto scale = service->getScale();
   _holder->changeWidthAndHeight (service->getElSize() * scale, service->getElSize() * scale);
-  _holder->setOpacity(100);
+  _holder->setOpacity(0);
   addChild(_holder, 1, kTagHolder);
   
 //  auto index = rand() % TOTAL_NUMBER_NORMAL;
@@ -64,12 +64,16 @@ bool NumberLayer::init() {
 void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   Vec2 locationInNode = this->convertToNodeSpace(touch->getLocation());
   auto holder = (LayerColor*)this->getChildByTag(kTagHolder);
+  auto batch = (Ball*)holder->getChildByTag(kTagBatch);
   Size s = holder->getContentSize();
   Rect rect = Rect(0, 0, s.width, s.height);
   if (rect.containsPoint(locationInNode))
   {
     log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-    holder->setColor(Color3B(255, 255, 255));
+    this->choice = true;
+    holder->setColor(Color3B(181, 106, 245));
+    holder->setOpacity(100);
+    batch->lift();
   }
 }
 
@@ -77,11 +81,11 @@ void NumberLayer::fill() {
   if (isFill()) {
     log("action");
     if (this->next) {
-      auto nextSprite = (Sprite*)this->next->getSprite();
-      if (nextSprite) {
+      auto nextBatch = (Ball*)this->next->getBatch();
+      if (nextBatch) {
         log("down sprite");
-        createSprite(nextSprite);
-        this->next->removeSprite();
+        createSprite(nextBatch);
+        this->next->removeBatch();
         if (this->prev) this->prev->fill();
       } else {
         log("fill next");
@@ -99,12 +103,12 @@ void NumberLayer::fill() {
 
 
 bool NumberLayer::isFill() {
-  auto sprite = this->getSprite();
+  auto sprite = this->getBatch();
   if(!sprite) return true;
   return false;
 }
 
-void NumberLayer::createSprite(Sprite *sprite) {
+void NumberLayer::createSprite(Ball *ball) {
 //  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
 //  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
 //  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
@@ -119,9 +123,12 @@ void NumberLayer::createSprite(Sprite *sprite) {
   _sprite = Sprite::createWithSpriteFrameName("purple.png");
   _sprite->setAnchorPoint(Vec2(0.5, 0.5));
   _sprite->setPosition(Vec2(0, 0));
-  _batch->setPosition(Vec2(30, 30));
+  _batch->setPosition(Vec2(ball->getPositionX(), ball->getPositionY() + 50));
   _batch->addNormalBall(_sprite);
-  addSprite();
+  auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
+  auto seq = Sequence::create(moveTo, nullptr);
+  _batch->runAction(seq);
+  addBatch();
 }
 
 void NumberLayer::createSprite() {
@@ -139,19 +146,27 @@ void NumberLayer::createSprite() {
   auto sprite = Sprite::createWithSpriteFrameName("purple.png");
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
-  _batch->setPosition(Vec2(30, 30));
+  _batch->setPosition(Vec2(30, 30 * this->index));
   _batch->addNormalBall(sprite);
-  addSprite();
+  auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
+  auto seq = Sequence::create(moveTo, nullptr);
+  _batch->runAction(seq);
+  addBatch();
 }
 
-void NumberLayer::removeSprite() {
-  this->_holder->removeChildByTag(kTagSprite);
+void NumberLayer::removeBatch() {
+  this->_holder->removeChildByTag(kTagBatch);
 }
 
-void NumberLayer::addSprite() {
-  this->_holder->addChild(_batch, 1, kTagSprite);
+void NumberLayer::addBatch() {
+  this->_holder->addChild(_batch, 1, kTagBatch);
 }
 
-Ball* NumberLayer::getSprite() {
-  return (Ball*)this->_holder->getChildByTag(kTagSprite);
+Ball* NumberLayer::getBatch() {
+  return (Ball*)this->_holder->getChildByTag(kTagBatch);
+}
+
+void NumberLayer::reset() {
+  choice = false;
+  _holder->setOpacity(0);
 }

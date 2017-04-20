@@ -25,11 +25,12 @@ public:
 
   virtual bool init() override;
   void fill();
-  void removeSprite();
-  void addSprite();
-  Ball* getSprite();
-  void createSprite(Sprite *sprite);
+  void removeBatch();
+  void addBatch();
+  Ball* getBatch();
+  void createSprite(Ball *sprite);
   void createSprite();
+  void reset();
   bool isFill();
   void afterMove(NumberLayer *layer);
   

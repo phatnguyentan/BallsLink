@@ -30,14 +30,14 @@ void Ball::lift() {
   if (!_isLifting) {
     _isLifting = true;
     auto delay = DelayTime::create(0.2);
-    auto scale1 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.05, 0.95));
+    auto scale1 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.1, 0.9));
     auto scale2 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1, 1));
-    auto scale3 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 0.95, 1.05));
+    auto scale3 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 0.9, 1.1));
     auto off = CallFunc::create(CC_CALLBACK_0(Ball::toggleLift, this));
     auto move1 = move(0, 2);
     auto move2 = move(0, -2);
 
-    auto seq = Sequence::create(delay, delay, scale1, delay, scale2, scale3, move1, move2, scale2, off, nullptr);
+    auto seq = Sequence::create(scale1, delay, scale2, scale3, move1, move2, scale2, off, nullptr);
     runAction(seq);
   }
 }

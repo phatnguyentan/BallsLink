@@ -34,9 +34,13 @@ Chap* Chap::getInstance() {
 }
 
 Chap* Chap::init() {
-  chap->_version = "1.0";
-  chap->_listChar = "2345";
+  _version = "1.0";
+  _map = TMXTiledMap::create("maps/chap1.tmx");
   return chap;
+}
+
+TMXTiledMap* Chap::getMap() {
+  return _map;
 }
 
 

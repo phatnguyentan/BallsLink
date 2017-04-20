@@ -15,6 +15,7 @@
 #define CHAP_H
 
 #include "cocos2d.h"
+USING_NS_CC;
 
 class Chap {
 public:
@@ -23,10 +24,11 @@ public:
   virtual ~Chap();
  
   static Chap* getInstance();
+  TMXTiledMap* getMap();
   Chap* init();
 private:
   char* _version;
-  char* _listChar;
+  TMXTiledMap* _map;
   
 };
 

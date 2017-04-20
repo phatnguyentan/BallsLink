@@ -74,19 +74,19 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-//  for (NumberLayer *layer : this->_numberLayers) {
-//    if(layer->choice == true) {
-//      log("remove");
-//      layer->removeSprite();
-//    }
-//  }
-//  for (NumberLayer *layer : this->_numberLayers) {
-//    layer->fill();
-//  }
-//  
-//  for (NumberLayer *layer : this->_numberLayers) {
-//    layer->choice = false;
-//  }
+  for (NumberLayer *layer : this->_numberLayers) {
+    if(layer->choice == true) {
+      log("remove");
+      layer->removeBatch();
+    }
+  }
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->fill();
+  }
+  
+  for (NumberLayer *layer : this->_numberLayers) {
+    layer->reset();
+  }
 }
 
 
@@ -126,10 +126,8 @@ void PanelLayer::initTiledMap() {
 }
 
 void PanelLayer::initBg() {
-  auto sprite = Sprite::create("bgPanel.png");
-  sprite->setAnchorPoint(Vec2(0, 0));
-  sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
-  sprite->setScale(service->getScale(sprite->getContentSize()));
-  addChild(sprite, kOrderBg, kTagBg);
+  _chap->getMap()->setScale(service->getScale() * 1.6);
+  _chap->getMap()->setPosition(Vec2(service->getPlayFrameX(), service->getPlayFrameY()));
+  addChild(_chap->getMap(), kOrderBg, kTagBg);
 }
