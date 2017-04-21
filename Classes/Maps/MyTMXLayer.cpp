@@ -15,7 +15,7 @@
 
 enum 
 {
-    kTagNumberLayer
+    kTagElementLayer
 };
 
 MyTMXLayer::MyTMXLayer() {

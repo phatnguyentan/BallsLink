@@ -11,14 +11,14 @@
  * Created on March 17, 2017, 1:37 PM
  */
 
-#include "NumberLayer.h"
+#include "ElementLayer.h"
 
 #define TOTAL_NUMBER (10)
 #define TOTAL_NUMBER_NORMAL (3)
 
 enum 
 {
-    kTagNumberLayer,
+    kTagElementLayer,
     kTagBatch,
     kTagHolder,
     kTagSprite
@@ -34,17 +34,17 @@ static const char *numberNormal[TOTAL_NUMBER_NORMAL] = {
 };
 
 
-NumberLayer::NumberLayer() {
+ElementLayer::ElementLayer() {
 }
 
-NumberLayer::NumberLayer(const NumberLayer& orig) {
+ElementLayer::ElementLayer(const ElementLayer& orig) {
   choice = false;
 }
 
-NumberLayer::~NumberLayer() {
+ElementLayer::~ElementLayer() {
 }
 
-bool NumberLayer::init() {
+bool ElementLayer::init() {
   _holder = LayerColor::create(Color4B(53, 53, 53, 255));
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
@@ -61,7 +61,7 @@ bool NumberLayer::init() {
   return true;
 }
 
-void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
+void ElementLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   Vec2 locationInNode = this->convertToNodeSpace(touch->getLocation());
   auto holder = (LayerColor*)this->getChildByTag(kTagHolder);
   auto batch = (Ball*)holder->getChildByTag(kTagBatch);
@@ -77,7 +77,7 @@ void NumberLayer::onPanelTouchMoved(Touch *touch, Event *event) {
   }
 }
 
-void NumberLayer::fill() {
+void ElementLayer::fill() {
   if (isFill()) {
     log("action");
     if (this->next) {
@@ -102,13 +102,13 @@ void NumberLayer::fill() {
 }
 
 
-bool NumberLayer::isFill() {
+bool ElementLayer::isFill() {
   auto sprite = this->getBatch();
   if(!sprite) return true;
   return false;
 }
 
-void NumberLayer::createSprite(Ball *ball) {
+void ElementLayer::createSprite(Ball *ball) {
 //  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
 //  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
 //  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
@@ -120,18 +120,19 @@ void NumberLayer::createSprite(Ball *ball) {
   
   _batch = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  _sprite = Sprite::createWithSpriteFrameName("purple.png");
-  _sprite->setAnchorPoint(Vec2(0.5, 0.5));
-  _sprite->setPosition(Vec2(0, 0));
+  auto sprite = Sprite::createWithSpriteFrameName("purple.png");
+  sprite->setAnchorPoint(Vec2(0.5, 0.5));
+  sprite->setPosition(Vec2(0, 0));
+  sprite->setScale(1.2);
   _batch->setPosition(Vec2(ball->getPositionX(), ball->getPositionY() + 50));
-  _batch->addNormalBall(_sprite);
+  _batch->addNormalBall(sprite);
   auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
   auto seq = Sequence::create(moveTo, nullptr);
   _batch->runAction(seq);
   addBatch();
 }
 
-void NumberLayer::createSprite() {
+void ElementLayer::createSprite() {
 //  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
 //  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
 //  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
@@ -146,6 +147,7 @@ void NumberLayer::createSprite() {
   auto sprite = Sprite::createWithSpriteFrameName("purple.png");
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
+  sprite->setScale(1.2);
   _batch->setPosition(Vec2(30, 30 * this->index));
   _batch->addNormalBall(sprite);
   auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
@@ -154,19 +156,20 @@ void NumberLayer::createSprite() {
   addBatch();
 }
 
-void NumberLayer::removeBatch() {
+void ElementLayer::removeBatch() {
   this->_holder->removeChildByTag(kTagBatch);
 }
 
-void NumberLayer::addBatch() {
+void ElementLayer::addBatch() {
   this->_holder->addChild(_batch, 1, kTagBatch);
 }
 
-Ball* NumberLayer::getBatch() {
+Ball* ElementLayer::getBatch() {
   return (Ball*)this->_holder->getChildByTag(kTagBatch);
 }
 
-void NumberLayer::reset() {
+void ElementLayer::reset() {
   choice = false;
   _holder->setOpacity(0);
+  _batch->stopLift();
 }

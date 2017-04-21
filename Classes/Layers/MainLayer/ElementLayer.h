@@ -11,17 +11,17 @@
  * Created on March 17, 2017, 1:37 PM
  */
 
-#ifndef NUMBERLAYER_H
-#define NUMBERLAYER_H
+#ifndef ELEMENTLAYER_H
+#define ELEMENTLAYER_H
 #include "../BaseLayer.h"
 #include "../../Maps/MyTMXLayer.h"
 #include "../../Sprites/Ball/Ball.h"
 
-class NumberLayer : public BaseLayer {
+class ElementLayer : public BaseLayer {
 public:
-  NumberLayer();
-  NumberLayer(const NumberLayer& orig);
-  virtual ~NumberLayer();
+  ElementLayer();
+  ElementLayer(const ElementLayer& orig);
+  virtual ~ElementLayer();
 
   virtual bool init() override;
   void fill();
@@ -32,13 +32,13 @@ public:
   void createSprite();
   void reset();
   bool isFill();
-  void afterMove(NumberLayer *layer);
+  void afterMove(ElementLayer *layer);
   
   void onPanelTouchMoved(Touch *touch, Event *event);
-  CREATE_FUNC(NumberLayer);
+  CREATE_FUNC(ElementLayer);
   
-  NumberLayer *next;
-  NumberLayer *prev;
+  ElementLayer *next;
+  ElementLayer *prev;
   int index;
   bool choice = false;
   

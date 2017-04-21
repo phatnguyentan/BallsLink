@@ -148,7 +148,7 @@ set(GAME_SRC
   Classes/Scenes/MainScene/PlayScene.cpp
   Classes/Scenes/Test/TestScene.cpp
   Classes/Layers/BaseLayer.cpp
-  Classes/Layers/MainLayer/NumberLayer.cpp
+  Classes/Layers/MainLayer/ElementLayer.cpp
   Classes/Layers/MainLayer/PanelLayer.cpp
   Classes/Layers/MainLayer/HolderLayer.cpp
   Classes/Layers/Test/TestLayer.cpp
@@ -169,7 +169,7 @@ set(GAME_HEADERS
   Classes/Scenes/MainScene/PlayScene.h
   Classes/Scenes/Test/TestScene.h
   Classes/Layers/BaseLayer.h
-  Classes/Layers/MainLayer/NumberLayer.h
+  Classes/Layers/MainLayer/ElementLayer.h
   Classes/Layers/MainLayer/PanelLayer.h
   Classes/Layers/Test/TestLayer.h
   Classes/Sprites/BaseSprite.h

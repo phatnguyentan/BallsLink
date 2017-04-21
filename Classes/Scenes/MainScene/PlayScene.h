@@ -14,7 +14,7 @@
 #ifndef PLAYSCENE_H
 #define PLAYSCENE_H
 
-#include "../../Layers/MainLayer/NumberLayer.h"
+#include "../../Layers/MainLayer/ElementLayer.h"
 #include "../../Layers/MainLayer/PanelLayer.h"
 #include "../BaseScene.h"
 #include "../../Core/Services/Service.h"
@@ -29,7 +29,7 @@ public:
   static Scene* createScene();
   CREATE_FUNC(PlayScene);
 private:
-  Vector<NumberLayer*> _matrix;
+  Vector<ElementLayer*> _matrix;
   int _width;
   int _height;
   float _matrixLeftBottomX;

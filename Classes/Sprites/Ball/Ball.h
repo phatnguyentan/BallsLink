@@ -26,7 +26,7 @@ public:
   void addNormalBall(Sprite *ball);
   void scale(float x, float y);
   MoveBy* move(float x, float y);
-  void toggleLift();
+  void stopLift();
   void zoom(float x, float y);
 private:
   bool _isLifting = true;

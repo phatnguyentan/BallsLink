@@ -14,7 +14,8 @@
 #include "Ball.h"
 
 enum {
-  kTagNormal
+  kTagNormal,
+  kTagLift
 };
 
 Ball::Ball() {
@@ -27,19 +28,17 @@ Ball::~Ball() {
 }
 
 void Ball::lift() {
-  if (!_isLifting) {
-    _isLifting = true;
-    auto delay = DelayTime::create(0.2);
-    auto scale1 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.1, 0.9));
-    auto scale2 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1, 1));
-    auto scale3 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 0.9, 1.1));
-    auto off = CallFunc::create(CC_CALLBACK_0(Ball::toggleLift, this));
-    auto move1 = move(0, 2);
-    auto move2 = move(0, -2);
+  auto delay = DelayTime::create(0.2);
+  auto scale1 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.3, 1.1));
+  auto scale2 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.2, 1.2));
+  auto scale3 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, 1.1, 1.3));
+  auto move1 = move(0, 2);
+  auto move2 = move(0, -2);
 
-    auto seq = Sequence::create(scale1, delay, scale2, scale3, move1, move2, scale2, off, nullptr);
-    runAction(seq);
-  }
+  auto seq = Sequence::create(scale1, delay, scale2, scale3, move1, move2, scale2, nullptr);
+  auto repeatLift = RepeatForever::create(seq);
+  repeatLift->setTag( kTagLift );
+  runAction(repeatLift);
 }
 
 void Ball::addNormalBall(Sprite *ball) {
@@ -56,8 +55,9 @@ MoveBy* Ball::move(float x, float y) {
   return MoveBy::create(0.2, Vec2(x, y));
 }
 
-void Ball::toggleLift() {
-  _isLifting = !_isLifting;
+void Ball::stopLift() {
+//  getActionByTag(kTagLift)->release();
+//  removeChildByTag(kTagLift);
 }
 
 void Ball::zoom(float x, float y) {

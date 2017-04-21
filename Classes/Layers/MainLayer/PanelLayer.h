@@ -14,7 +14,7 @@
 #ifndef PANELLAYER_H
 #define PANELLAYER_H
 
-#include "NumberLayer.h"
+#include "ElementLayer.h"
 #include "../../Maps/Chap.h"
 #include "../../Maps/MyTMXLayer.h"
 #include "../BaseLayer.h"
@@ -34,7 +34,7 @@ public:
   
   CREATE_FUNC(PanelLayer);
   
-  Vector<NumberLayer*> _numberLayers;
+  Vector<ElementLayer*> _elLayers;
 private:
   Chap* _chap;
   

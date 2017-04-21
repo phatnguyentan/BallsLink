@@ -18,7 +18,7 @@ enum
 {
     kTagBg,
     kTagTileMap,
-    kTagNumberLayer,
+    kTagElementLayer,
     kTagBatch,
     kTagHolder,
     kTagNumber,
@@ -27,7 +27,7 @@ enum
 enum 
 {
     kOrderBg,
-    kOrderNumberLayer,
+    kOrderElementLayer,
 };
 
 
@@ -55,36 +55,36 @@ void PanelLayer::initEvent() {
   auto eventListener = EventListenerTouchOneByOne::create();
   eventListener->onTouchBegan = CC_CALLBACK_2(PanelLayer::onTouchBegan, this);
   eventListener->onTouchMoved = CC_CALLBACK_2(PanelLayer::onTouchMoved, this);
-  eventListener->onTouchEnded = CC_CALLBACK_2(NumberLayer::onTouchEnded, this);
-  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, this->_numberLayers.at(0));
-  for (int i = 1; i < this->_numberLayers.size(); i++) {
-    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener->clone(), this->_numberLayers.at(i));
+  eventListener->onTouchEnded = CC_CALLBACK_2(ElementLayer::onTouchEnded, this);
+  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, this->_elLayers.at(0));
+  for (int i = 1; i < this->_elLayers.size(); i++) {
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener->clone(), this->_elLayers.at(i));
   }
 }
 
 void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
-  auto target = static_cast<NumberLayer*>(event->getCurrentTarget());
+  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
   target->onPanelTouchMoved(touch, event);
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
-  auto target = static_cast<NumberLayer*>(event->getCurrentTarget());
+  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
   target->onPanelTouchMoved(touch, event);
   return true;
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-  for (NumberLayer *layer : this->_numberLayers) {
+  for (ElementLayer *layer : this->_elLayers) {
     if(layer->choice == true) {
       log("remove");
-      layer->removeBatch();
+//      layer->removeBatch();
     }
   }
-  for (NumberLayer *layer : this->_numberLayers) {
+  for (ElementLayer *layer : this->_elLayers) {
     layer->fill();
   }
   
-  for (NumberLayer *layer : this->_numberLayers) {
+  for (ElementLayer *layer : this->_elLayers) {
     layer->reset();
   }
 }
@@ -95,16 +95,16 @@ void PanelLayer::initTiledMap() {
   auto length = service->getMapLength();
   for (int i = 0; i < length; i++) {
     for(int j = 0; j < length; j++) {
-      NumberLayer *layer = NumberLayer::create();
+      ElementLayer *layer = ElementLayer::create();
       if(j == 0) {
         layer->prev = NULL;
         layer->next = NULL;
       } else if (j > 0 && j < length -1){
-        layer->prev = this->_numberLayers.at(length * i + j -1);
+        layer->prev = this->_elLayers.at(length * i + j -1);
         auto prev = layer->prev;
         prev->next = layer;
       } else if (j == length -1) {
-        layer->prev = this->_numberLayers.at(length * i + j -1);
+        layer->prev = this->_elLayers.at(length * i + j -1);
         auto prev = layer->prev;
         prev->next = layer;
         layer->next = NULL;
@@ -115,12 +115,12 @@ void PanelLayer::initTiledMap() {
               service->getElSize() * i * scale + service->getPlayFrameX(), 
               service->getElSize() * j * scale + service->getPlayFrameY()
       ));
-      layer->index = (int)this->_numberLayers.size();
-      this->addChild(layer, kOrderNumberLayer, kTagNumberLayer);
-      this->_numberLayers.pushBack(layer);
+      layer->index = (int)this->_elLayers.size();
+      this->addChild(layer, kOrderElementLayer, kTagElementLayer);
+      this->_elLayers.pushBack(layer);
     }
   } 
-  for (NumberLayer *layer : this->_numberLayers) {
+  for (ElementLayer *layer : this->_elLayers) {
     layer->fill();
   }
 }
