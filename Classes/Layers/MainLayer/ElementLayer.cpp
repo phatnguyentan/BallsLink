@@ -13,9 +13,6 @@
 
 #include "ElementLayer.h"
 
-#define TOTAL_NUMBER (10)
-#define TOTAL_NUMBER_NORMAL (3)
-
 enum 
 {
     kTagElementLayer,
@@ -28,11 +25,6 @@ enum
 {
     kOrder
 };
-
-static const char *numberNormal[TOTAL_NUMBER_NORMAL] = {
-	"1","2","3"
-};
-
 
 ElementLayer::ElementLayer() {
 }
@@ -53,11 +45,6 @@ bool ElementLayer::init() {
   _holder->changeWidthAndHeight (service->getElSize() * scale, service->getElSize() * scale);
   _holder->setOpacity(0);
   addChild(_holder, 1, kTagHolder);
-  
-//  auto index = rand() % TOTAL_NUMBER_NORMAL;
-//  _value = Label::createWithTTF(numberNormal[index], "fonts/arial.ttf", 20);
-
-//  addChild(_batch, 0, kTagBatch);
   return true;
 }
 
@@ -81,8 +68,8 @@ void ElementLayer::fill() {
   if (isFill()) {
     log("action");
     if (this->next) {
-      auto nextBatch = (Ball*)this->next->getBatch();
-      if (nextBatch) {
+      auto nextBatch = this->next->getBatch();
+      if (this->next->batchExist()) {
         log("down sprite");
         createSprite(nextBatch);
         this->next->removeBatch();
@@ -103,56 +90,17 @@ void ElementLayer::fill() {
 
 
 bool ElementLayer::isFill() {
-  auto sprite = this->getBatch();
-  if(!sprite) return true;
+  if(!this->batchExist()) return true;
   return false;
 }
 
 void ElementLayer::createSprite(Ball *ball) {
-//  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
-//  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
-//  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
-//  _sprite->setPosition(Vec2(sprite->getPositionX(), sprite->getPositionY() + 50));
-//  auto moveTo = MoveTo::create(0.2, Vec2(0, 0));
-//  auto seq = Sequence::create(moveTo, nullptr);
-//  _sprite->runAction(seq);
-//  this->addSprite();
-  
-  _batch = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto sprite = Sprite::createWithSpriteFrameName("purple.png");
-  sprite->setAnchorPoint(Vec2(0.5, 0.5));
-  sprite->setPosition(Vec2(0, 0));
-  sprite->setScale(1.2);
-  _batch->setPosition(Vec2(ball->getPositionX(), ball->getPositionY() + 50));
-  _batch->addNormalBall(sprite);
-  auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
-  auto seq = Sequence::create(moveTo, nullptr);
-  _batch->runAction(seq);
+  _batch = Ball::initBall(ball);
   addBatch();
 }
 
 void ElementLayer::createSprite() {
-//  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/number.plist");
-//  _sprite = Sprite::createWithSpriteFrameName("cir_silver.png");
-//  _sprite->setAnchorPoint(Vec2(-0.16, -0.11));
-//  _sprite->setPosition(Vec2(0, 100 * this->index));
-//  auto moveTo = MoveTo::create(0.3, Vec2(0, 0));
-//  auto seq = Sequence::create(moveTo, nullptr);
-//  _sprite->runAction(seq);
-//  this->addSprite();
-  
-  _batch = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto sprite = Sprite::createWithSpriteFrameName("purple.png");
-  sprite->setAnchorPoint(Vec2(0.5, 0.5));
-  sprite->setPosition(Vec2(0, 0));
-  sprite->setScale(1.2);
-  _batch->setPosition(Vec2(30, 30 * this->index));
-  _batch->addNormalBall(sprite);
-  auto moveTo = MoveTo::create(0.3, Vec2(30, 30));
-  auto seq = Sequence::create(moveTo, nullptr);
-  _batch->runAction(seq);
+  _batch = Ball::initBall();
   addBatch();
 }
 
@@ -165,7 +113,15 @@ void ElementLayer::addBatch() {
 }
 
 Ball* ElementLayer::getBatch() {
-  return (Ball*)this->_holder->getChildByTag(kTagBatch);
+  return this->_batch;
+}
+
+bool ElementLayer::batchExist() {
+  if (this->_holder->getChildByTag(kTagBatch)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 void ElementLayer::reset() {

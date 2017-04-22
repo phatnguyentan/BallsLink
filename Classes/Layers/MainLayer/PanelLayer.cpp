@@ -77,7 +77,7 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (ElementLayer *layer : this->_elLayers) {
     if(layer->choice == true) {
       log("remove");
-//      layer->removeBatch();
+      layer->removeBatch();
     }
   }
   for (ElementLayer *layer : this->_elLayers) {
@@ -123,6 +123,7 @@ void PanelLayer::initTiledMap() {
   for (ElementLayer *layer : this->_elLayers) {
     layer->fill();
   }
+  this->_elLayers;
 }
 
 void PanelLayer::initBg() {

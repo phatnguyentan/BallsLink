@@ -40,6 +40,11 @@ float Service::getScale() {
   return visibleSize.width / 1000;
 }
 
+float Service::getScale2() {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  return visibleSize.width / 1000 * 1.6;
+}
+
 int Service::getMapLength() {
   return 8;
 }

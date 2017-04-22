@@ -6,35 +6,35 @@ repeat: none
 purple
   rotate: false
   xy: 1, 1
-  size: 77, 77
-  orig: 77, 77
+  size: 95, 95
+  orig: 95, 95
   offset: 0, 0
   index: -1
 yellow
   rotate: false
-  xy: 80, 1
-  size: 77, 77
-  orig: 77, 77
+  xy: 98, 1
+  size: 95, 95
+  orig: 95, 95
   offset: 0, 0
   index: -1
 blue
   rotate: false
-  xy: 159, 1
-  size: 77, 77
-  orig: 77, 77
+  xy: 195, 1
+  size: 95, 95
+  orig: 95, 95
   offset: 0, 0
   index: -1
 green
   rotate: false
-  xy: 238, 1
-  size: 77, 77
-  orig: 77, 77
+  xy: 292, 1
+  size: 95, 95
+  orig: 95, 95
   offset: 0, 0
   index: -1
 red
   rotate: false
-  xy: 317, 1
-  size: 77, 77
-  orig: 77, 77
+  xy: 389, 1
+  size: 95, 95
+  orig: 95, 95
   offset: 0, 0
   index: -1

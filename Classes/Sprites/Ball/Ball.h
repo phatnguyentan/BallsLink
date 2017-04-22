@@ -15,6 +15,7 @@
 #define BALL_H
 
 #include "../BaseSprite.h"
+#include "../../Core/Services/Service.h"
 
 class Ball : public BaseSprite{
 public:
@@ -27,10 +28,12 @@ public:
   void scale(float x, float y);
   MoveBy* move(float x, float y);
   void stopLift();
+  static Ball* initBall();
+  static Ball* initBall(Ball* ball);
   void zoom(float x, float y);
+  int index;
 private:
-  bool _isLifting = true;
-
+  
 };
 
 #endif /* BALL_H */

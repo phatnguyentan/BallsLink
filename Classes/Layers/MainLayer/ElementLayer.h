@@ -31,6 +31,7 @@ public:
   void createSprite(Ball *sprite);
   void createSprite();
   void reset();
+  bool batchExist();
   bool isFill();
   void afterMove(ElementLayer *layer);
   

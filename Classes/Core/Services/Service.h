@@ -26,6 +26,7 @@ public:
   static Service* getInstance();
   float getScale(Size size);
   float getScale();
+  float getScale2();
   float getPlayFrameX();
   float getPlayFrameY();
   int getElSize();
