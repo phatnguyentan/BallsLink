@@ -31,9 +31,11 @@ public:
   void createSprite(Ball *sprite);
   void createSprite();
   void reset();
+  void active();
   bool batchExist();
   bool isFill();
   void afterMove(ElementLayer *layer);
+  LayerColor* getHolder();
   
   void onPanelTouchMoved(Touch *touch, Event *event);
   CREATE_FUNC(ElementLayer);

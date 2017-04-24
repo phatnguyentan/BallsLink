@@ -18,6 +18,7 @@
 #include "../../Maps/Chap.h"
 #include "../../Maps/MyTMXLayer.h"
 #include "../BaseLayer.h"
+#include "../../Sprites/Ball/Ball.h"
 
 class PanelLayer : public BaseLayer {
 public:
@@ -31,12 +32,15 @@ public:
   void onTouchEnded(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
   void initBg();
+  void gameHandler(Touch *touch, Event *event);
   
   CREATE_FUNC(PanelLayer);
   
   Vector<ElementLayer*> _elLayers;
 private:
   Chap* _chap;
+  bool _force;
+  int _ballIndex;
   
 };
 

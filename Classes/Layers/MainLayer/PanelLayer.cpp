@@ -63,27 +63,24 @@ void PanelLayer::initEvent() {
 }
 
 void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
-  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
-  target->onPanelTouchMoved(touch, event);
+  gameHandler(touch, event);
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
-  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
-  target->onPanelTouchMoved(touch, event);
+  gameHandler(touch, event);
   return true;
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (ElementLayer *layer : this->_elLayers) {
     if(layer->choice == true) {
-      log("remove");
       layer->removeBatch();
+      _force = true;
     }
   }
   for (ElementLayer *layer : this->_elLayers) {
     layer->fill();
   }
-  
   for (ElementLayer *layer : this->_elLayers) {
     layer->reset();
   }
@@ -112,8 +109,8 @@ void PanelLayer::initTiledMap() {
       layer->setAnchorPoint(Vec2(0, 0));
       auto scale = service->getScale();
       layer->setPosition(Vec2(
-              service->getElSize() * i * scale + service->getPlayFrameX(), 
-              service->getElSize() * j * scale + service->getPlayFrameY()
+        service->getElSize() * i * scale + service->getPlayFrameX(), 
+        service->getElSize() * j * scale + service->getPlayFrameY()
       ));
       layer->index = (int)this->_elLayers.size();
       this->addChild(layer, kOrderElementLayer, kTagElementLayer);
@@ -131,4 +128,24 @@ void PanelLayer::initBg() {
   _chap->getMap()->setScale(service->getScale() * 1.6);
   _chap->getMap()->setPosition(Vec2(service->getPlayFrameX(), service->getPlayFrameY()));
   addChild(_chap->getMap(), kOrderBg, kTagBg);
+}
+
+void PanelLayer::gameHandler(Touch *touch, Event *event) {
+  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
+  Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+  Size s = target->getHolder()->getContentSize();
+  Rect rect = Rect(0, 0, s.width, s.height);
+  if (rect.containsPoint(locationInNode))
+  {
+    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
+    if (_force) {
+      target->active();
+      _force = false;
+      _ballIndex = target->getBatch()->index;
+    } else {
+      if (target->getBatch()->index == _ballIndex) {
+        target->active();
+      }
+    }
+  }
 }

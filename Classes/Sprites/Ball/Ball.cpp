@@ -17,7 +17,7 @@
 #define TOTAL_NUMBER_NORMAL (5)
 
 static const char *names[TOTAL_NUMBER_NORMAL] = {
-	"purple.png", "red.png", "yellow.png", "blue.png", "green.png"
+  "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
 };
 
 enum {

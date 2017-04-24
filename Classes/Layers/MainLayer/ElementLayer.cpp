@@ -66,25 +66,25 @@ void ElementLayer::onPanelTouchMoved(Touch *touch, Event *event) {
 
 void ElementLayer::fill() {
   if (isFill()) {
-    log("action");
+//    log("action");
     if (this->next) {
       auto nextBatch = this->next->getBatch();
       if (this->next->batchExist()) {
-        log("down sprite");
+//        log("down sprite");
         createSprite(nextBatch);
         this->next->removeBatch();
         if (this->prev) this->prev->fill();
       } else {
-        log("fill next");
+//        log("fill next");
         this->next->fill();
       }
     } else {
-      log("add sprite");
+//      log("add sprite");
       createSprite();
       this->prev->fill();
     }
   } else {
-    log("stop");
+//    log("stop");
   }
 }
 
@@ -128,4 +128,15 @@ void ElementLayer::reset() {
   choice = false;
   _holder->setOpacity(0);
   _batch->stopLift();
+}
+
+LayerColor* ElementLayer::getHolder() {
+  return _holder;
+}
+
+void ElementLayer::active() {
+  choice = true;
+  getHolder()->setColor(Color3B(181, 106, 245));
+  getHolder()->setOpacity(100);
+  getBatch()->lift();
 }
