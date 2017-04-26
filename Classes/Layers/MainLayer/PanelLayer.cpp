@@ -44,6 +44,7 @@ PanelLayer::~PanelLayer() {
 bool PanelLayer::init() {
   _chap = Chap::getInstance();
   _chap->init();
+  setForce(true);
   initBg();
   initTiledMap();
   initEvent();
@@ -73,9 +74,9 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (ElementLayer *layer : this->_elLayers) {
-    if(layer->choice == true) {
+    if(layer->getActive()) {
       layer->removeBatch();
-      _force = true;
+      setForce(true);
     }
   }
   for (ElementLayer *layer : this->_elLayers) {
@@ -93,6 +94,8 @@ void PanelLayer::initTiledMap() {
   for (int i = 0; i < length; i++) {
     for(int j = 0; j < length; j++) {
       ElementLayer *layer = ElementLayer::create();
+      layer->setRow(j);
+      layer->setColumn(i);
       if(j == 0) {
         layer->prev = NULL;
         layer->next = NULL;
@@ -112,7 +115,6 @@ void PanelLayer::initTiledMap() {
         service->getElSize() * i * scale + service->getPlayFrameX(), 
         service->getElSize() * j * scale + service->getPlayFrameY()
       ));
-      layer->index = (int)this->_elLayers.size();
       this->addChild(layer, kOrderElementLayer, kTagElementLayer);
       this->_elLayers.pushBack(layer);
     }
@@ -138,14 +140,41 @@ void PanelLayer::gameHandler(Touch *touch, Event *event) {
   if (rect.containsPoint(locationInNode))
   {
     log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-    if (_force) {
+    log("row %i", target->getRow());
+    log("column %i", target->getColumn());
+    if (getForce()) {
       target->active();
-      _force = false;
+      setForce(false);
       _ballIndex = target->getBatch()->index;
     } else {
-      if (target->getBatch()->index == _ballIndex) {
+      if (target->getBatch()->index == _ballIndex && allowActive(target)) {
         target->active();
       }
     }
   }
+}
+
+ElementLayer* PanelLayer::getLayer(int row, int column) {
+  auto service = Service::getInstance();
+  auto length = service->getMapLength();
+  return this->_elLayers.at(length * column + row);
+}
+
+bool PanelLayer::allowActive(ElementLayer* layer) {
+  auto service = Service::getInstance();
+  auto length = service->getMapLength();
+  
+  for (int x = layer->getRow() - 1; x <= layer->getRow() + 1; x++) {
+    for (int y = layer->getColumn() - 1; y <= layer->getColumn() + 1; y++) {
+      if (x != layer->getRow() || y != layer->getColumn()) {
+        if (-1 < x && x < length && -1 < y && y < length ) {
+          auto layer = getLayer(x, y);
+          if (layer->getActive()) {
+            return true;
+          }
+        }  
+      }
+    }
+  }
+  return false;
 }

@@ -36,13 +36,15 @@ public:
   bool isFill();
   void afterMove(ElementLayer *layer);
   LayerColor* getHolder();
+
+  CC_SYNTHESIZE(int, _row, Row);
+  CC_SYNTHESIZE(int, _column, Column);
+  CC_SYNTHESIZE(bool, _active, Active);
   
-  void onPanelTouchMoved(Touch *touch, Event *event);
   CREATE_FUNC(ElementLayer);
   
   ElementLayer *next;
   ElementLayer *prev;
-  int index;
   bool choice = false;
   
 private:

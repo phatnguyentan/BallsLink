@@ -30,7 +30,7 @@ ElementLayer::ElementLayer() {
 }
 
 ElementLayer::ElementLayer(const ElementLayer& orig) {
-  choice = false;
+  
 }
 
 ElementLayer::~ElementLayer() {
@@ -45,23 +45,8 @@ bool ElementLayer::init() {
   _holder->changeWidthAndHeight (service->getElSize() * scale, service->getElSize() * scale);
   _holder->setOpacity(0);
   addChild(_holder, 1, kTagHolder);
+  setActive(false);
   return true;
-}
-
-void ElementLayer::onPanelTouchMoved(Touch *touch, Event *event) {
-  Vec2 locationInNode = this->convertToNodeSpace(touch->getLocation());
-  auto holder = (LayerColor*)this->getChildByTag(kTagHolder);
-  auto batch = (Ball*)holder->getChildByTag(kTagBatch);
-  Size s = holder->getContentSize();
-  Rect rect = Rect(0, 0, s.width, s.height);
-  if (rect.containsPoint(locationInNode))
-  {
-    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-    this->choice = true;
-    holder->setColor(Color3B(181, 106, 245));
-    holder->setOpacity(100);
-    batch->lift();
-  }
 }
 
 void ElementLayer::fill() {
@@ -125,7 +110,7 @@ bool ElementLayer::batchExist() {
 }
 
 void ElementLayer::reset() {
-  choice = false;
+  setActive(false);
   _holder->setOpacity(0);
   _batch->stopLift();
 }
@@ -135,7 +120,7 @@ LayerColor* ElementLayer::getHolder() {
 }
 
 void ElementLayer::active() {
-  choice = true;
+  setActive(true);
   getHolder()->setColor(Color3B(181, 106, 245));
   getHolder()->setOpacity(100);
   getBatch()->lift();
