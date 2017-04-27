@@ -25,9 +25,10 @@ public:
 
   virtual bool init() override;
   void fill();
+  void fillAll();
+  void processEndLogic();
   void removeBatch();
   void addBatch();
-  Ball* getBatch();
   void createSprite(Ball *sprite);
   void createSprite();
   void reset();
@@ -35,11 +36,13 @@ public:
   bool batchExist();
   bool isFill();
   void afterMove(ElementLayer *layer);
+  
   LayerColor* getHolder();
 
   CC_SYNTHESIZE(int, _row, Row);
   CC_SYNTHESIZE(int, _column, Column);
   CC_SYNTHESIZE(bool, _active, Active);
+  CC_SYNTHESIZE(Ball*, _batch, Batch);
   
   CREATE_FUNC(ElementLayer);
   
@@ -51,8 +54,6 @@ private:
   LayerColor *_holder;
   Label *_value;
   Sprite *_sprite;
-  
-  Ball *_batch;
   bool _touch = false;
 };
 

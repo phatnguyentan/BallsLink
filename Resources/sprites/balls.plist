@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{95,95}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{95,95}}</string>
+                <string>{{761, 153},{95,95}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{95,95}</string>
                 <key>textureRect</key>
-                <string>{{98,1},{95,95}}</string>
+                <string>{{195, 1},{95,95}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{95,95}</string>
                 <key>textureRect</key>
-                <string>{{195,1},{95,95}}</string>
+                <string>{{98, 1},{95,95}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{95,95}</string>
                 <key>textureRect</key>
-                <string>{{292,1},{95,95}}</string>
+                <string>{{1, 1},{95,95}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,82 @@
                 <key>spriteSourceSize</key>
                 <string>{95,95}</string>
                 <key>textureRect</key>
-                <string>{{389,1},{95,95}}</string>
+                <string>{{858, 153},{95,95}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>purple_broken.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{150, 150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150, 150}</string>
+                <key>textureRect</key>
+                <string>{{305, 98},{150, 150}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>green_broken.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{150, 150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150, 150}</string>
+                <key>textureRect</key>
+                <string>{{1, 98},{150, 150}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>yellow_broken.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{150, 150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150, 150}</string>
+                <key>textureRect</key>
+                <string>{{153, 98},{150, 150}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>red_broken.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{150, 150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150, 150}</string>
+                <key>textureRect</key>
+                <string>{{457, 98},{150, 150}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>blue_broken.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{150, 150}</string>
+                <key>spriteSourceSize</key>
+                <string>{150, 150}</string>
+                <key>textureRect</key>
+                <string>{{609, 98},{150, 150}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>

@@ -75,15 +75,9 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (ElementLayer *layer : this->_elLayers) {
     if(layer->getActive()) {
-      layer->removeBatch();
+      layer->processEndLogic();
       setForce(true);
     }
-  }
-  for (ElementLayer *layer : this->_elLayers) {
-    layer->fill();
-  }
-  for (ElementLayer *layer : this->_elLayers) {
-    layer->reset();
   }
 }
 

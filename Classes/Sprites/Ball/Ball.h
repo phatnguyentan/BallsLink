@@ -31,6 +31,8 @@ public:
   static Ball* initBall();
   static Ball* initBall(Ball* ball);
   void zoom(float x, float y);
+  void showBreakBall();
+  void hideBreakBall();
   int index;
 private:
   

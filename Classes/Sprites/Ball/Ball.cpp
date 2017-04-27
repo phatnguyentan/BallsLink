@@ -16,12 +16,17 @@
 #define TOTAL_NUMBER (10)
 #define TOTAL_NUMBER_NORMAL (5)
 
-static const char *names[TOTAL_NUMBER_NORMAL] = {
+static const char *normalBalls[TOTAL_NUMBER_NORMAL] = {
   "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
+};
+
+static const char *brokenBalls[TOTAL_NUMBER_NORMAL] = {
+  "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
 };
 
 enum {
   kTagNormal,
+  kTagBroken,
   kTagLift
 };
 
@@ -62,14 +67,17 @@ Ball* Ball::initBall() {
   auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
   auto index = (rand() % TOTAL_NUMBER_NORMAL);
-  auto sprite = Sprite::createWithSpriteFrameName(names[index]);
+  auto sprite = Sprite::createWithSpriteFrameName(normalBalls[index]);
+  auto spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[index]);
+  spriteBroken->setVisible(false);
   ball->index = index;
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
   sprite->setScale(service->getScale2());
   ball->setPosition(Vec2(30, 200));
-  ball->addNormalBall(sprite);
+  ball->addChild(sprite, 0, kTagNormal);
+  ball->addChild(spriteBroken, 1, kTagBroken);
   auto moveTo = MoveTo::create(0.1, Vec2(30, 30));
   auto seq = Sequence::create(moveTo, nullptr);
   ball->runAction(seq);
@@ -79,14 +87,17 @@ Ball* Ball::initBall() {
 Ball* Ball::initBall(Ball* other) {
   auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto sprite = Sprite::createWithSpriteFrameName(names[other->index]);
+  auto sprite = Sprite::createWithSpriteFrameName(normalBalls[other->index]);
+  auto spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[other->index]);
+  spriteBroken->setVisible(false);
   ball->index = other->index;
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
   sprite->setScale(service->getScale2());
   ball->setPosition(Vec2(other->getPositionX(), other->getPositionY() + 60));
-  ball->addNormalBall(sprite);
+  ball->addChild(sprite, 0, kTagNormal);
+  ball->addChild(spriteBroken, 1, kTagBroken);
   auto moveTo = MoveTo::create(0.1, Vec2(30, 30));
   auto seq = Sequence::create(moveTo, nullptr);
   ball->runAction(seq);
@@ -116,4 +127,14 @@ void Ball::stopLift() {
 void Ball::zoom(float x, float y) {
   setScaleX(x);
   setScaleX(y);
+}
+
+void Ball::showBreakBall() {
+  getChildByTag(kTagBroken)->setVisible(true);
+  getChildByTag(kTagNormal)->setVisible(false);
+}
+
+void Ball::hideBreakBall() {
+  getChildByTag(kTagBroken)->setVisible(false);
+  getChildByTag(kTagNormal)->setVisible(true);
 }

@@ -26,6 +26,11 @@ enum
     kOrder
 };
 
+enum 
+{
+    kActionRemove
+};
+
 ElementLayer::ElementLayer() {
 }
 
@@ -73,6 +78,13 @@ void ElementLayer::fill() {
   }
 }
 
+void ElementLayer::fillAll() {
+  auto el = this;
+  while (el) {
+    el->fill();
+    el = el->next;
+  }
+}
 
 bool ElementLayer::isFill() {
   if(!this->batchExist()) return true;
@@ -89,16 +101,27 @@ void ElementLayer::createSprite() {
   addBatch();
 }
 
+void ElementLayer::processEndLogic() {
+  getBatch()->showBreakBall();
+  auto delay = DelayTime::create(0.5);
+  auto remove = CallFunc::create(CC_CALLBACK_0(ElementLayer::removeBatch, this));
+  auto fillAll = CallFunc::create(CC_CALLBACK_0(ElementLayer::fillAll, this));
+  auto reset = CallFunc::create(CC_CALLBACK_0(ElementLayer::reset, this));
+  auto seq = Sequence::create(delay, remove, fillAll, reset, nullptr);
+  seq->setTag(kActionRemove);
+  if (this->getActionByTag(kActionRemove)) {
+    seq->startWithTarget(this);
+  } else {
+    this->runAction(seq);
+  }
+}
+
 void ElementLayer::removeBatch() {
   this->_holder->removeChildByTag(kTagBatch);
 }
 
 void ElementLayer::addBatch() {
   this->_holder->addChild(_batch, 1, kTagBatch);
-}
-
-Ball* ElementLayer::getBatch() {
-  return this->_batch;
 }
 
 bool ElementLayer::batchExist() {
