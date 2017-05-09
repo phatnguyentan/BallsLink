@@ -103,7 +103,7 @@ void ElementLayer::createSprite() {
 
 void ElementLayer::processEndLogic() {
   getBatch()->showBreakBall();
-  auto delay = DelayTime::create(0.5);
+  auto delay = DelayTime::create(0.2);
   auto remove = CallFunc::create(CC_CALLBACK_0(ElementLayer::removeBatch, this));
   auto fillAll = CallFunc::create(CC_CALLBACK_0(ElementLayer::fillAll, this));
   auto reset = CallFunc::create(CC_CALLBACK_0(ElementLayer::reset, this));
@@ -117,7 +117,9 @@ void ElementLayer::processEndLogic() {
 }
 
 void ElementLayer::removeBatch() {
-  this->_holder->removeChildByTag(kTagBatch);
+  if (batchExist()) {
+    this->_holder->removeChildByTag(kTagBatch);
+  }
 }
 
 void ElementLayer::addBatch() {

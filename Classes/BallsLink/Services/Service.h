@@ -14,10 +14,10 @@
 #ifndef SERVICE_H
 #define SERVICE_H
 
-#include "cocos2d.h"
-USING_NS_CC;
+#include "../../Core/Services/BaseService.h"
 
-class Service {
+
+class Service : public BaseService {
 public:
   Service();
   Service(const Service& orig);

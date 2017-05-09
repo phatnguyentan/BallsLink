@@ -15,8 +15,7 @@
 #define SCENECONTROLLER_H
 
 #include "BaseController.h"
-#include "Scenes/MainScene/PlayScene.h"
-#include "Scenes/Test/TestScene.h"
+#include "../../BallsLink/Scenes/MainScene/PlayScene.h"
 
 
 class SceneController : public BaseController{

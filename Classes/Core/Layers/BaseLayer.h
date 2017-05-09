@@ -16,7 +16,6 @@
 
 #include "cocos2d.h"
 USING_NS_CC;
-#include "../Core/Services/Service.h"
 
 class BaseLayer : public Layer {
 public:

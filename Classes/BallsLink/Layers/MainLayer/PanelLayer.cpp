@@ -12,7 +12,6 @@
  */
 
 #include "PanelLayer.h"
-#include "Maps/Chap.h"
 
 enum 
 {

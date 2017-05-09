@@ -17,7 +17,7 @@
 #include "SceneController.h"
 
 
-class ManagerController : public BaseController{
+class ManagerController : public BaseController {
 public:
   ManagerController();
   ManagerController(const ManagerController& orig);
@@ -32,4 +32,3 @@ private:
 };
 
 #endif /* MANAGERCONTROLLER_H */
-

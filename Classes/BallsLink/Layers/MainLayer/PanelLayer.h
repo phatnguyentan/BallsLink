@@ -17,7 +17,7 @@
 #include "ElementLayer.h"
 #include "../../Maps/Chap.h"
 #include "../../Maps/MyTMXLayer.h"
-#include "../BaseLayer.h"
+#include "../../../Core/Layers/BaseLayer.h"
 #include "../../Sprites/Ball/Ball.h"
 
 class PanelLayer : public BaseLayer {

@@ -141,42 +141,53 @@ endif( WIN32 )
 
 set(GAME_SRC
   Classes/AppDelegate.cpp
-  Classes/Controllers/ManagerController.cpp
-  Classes/Controllers/BaseController.cpp
-  Classes/Controllers/SceneController.cpp
-  Classes/Scenes/BaseScene.cpp
-  Classes/Scenes/MainScene/PlayScene.cpp
-  Classes/Scenes/Test/TestScene.cpp
-  Classes/Layers/BaseLayer.cpp
-  Classes/Layers/MainLayer/ElementLayer.cpp
-  Classes/Layers/MainLayer/PanelLayer.cpp
-  Classes/Layers/MainLayer/HolderLayer.cpp
-  Classes/Layers/Test/TestLayer.cpp
-  Classes/Sprites/BaseSprite.cpp
-  Classes/Sprites/Ball/Ball.cpp
-  Classes/Core/Services/Service.cpp
-  Classes/Maps/Chap.cpp
-  Classes/Maps/MyTMXLayer.cpp
+  Classes/Core/Controllers/BaseController.cpp
+  Classes/Core/Controllers/ManagerController.cpp
+  Classes/Core/Controllers/SceneController.cpp
+  Classes/Core/Scenes/BaseScene.cpp
+  Classes/Core/Layers/BaseLayer.cpp
+  Classes/Core/Sprites/BaseSprite.cpp
+  Classes/Core/Sprites/BaseBatchSprite.cpp
+  Classes/Core/Services/BaseService.cpp
+
+  Classes/BallsLink/Scenes/MainScene/PlayScene.cpp
+  Classes/BallsLink/Scenes/Test/TestScene.cpp
+
+  Classes/BallsLink/Layers/MainLayer/ElementLayer.cpp
+  Classes/BallsLink/Layers/MainLayer/PanelLayer.cpp
+  Classes/BallsLink/Layers/MainLayer/HolderLayer.cpp
+
+  Classes/BallsLink/Layers/Test/TestLayer.cpp
+  Classes/BallsLink/Sprites/Ball/Ball.cpp
+  Classes/BallsLink/Services/Service.cpp
+  Classes/BallsLink/Maps/Chap.cpp
+  Classes/BallsLink/Maps/MyTMXLayer.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
 set(GAME_HEADERS
   Classes/AppDelegate.h
-  Classes/Controllers/ManagerController.h
-  Classes/Controllers/BaseController.h
-  Classes/Controllers/SceneController.h
-  Classes/Scenes/BaseScene.h
-  Classes/Scenes/MainScene/PlayScene.h
-  Classes/Scenes/Test/TestScene.h
-  Classes/Layers/BaseLayer.h
-  Classes/Layers/MainLayer/ElementLayer.h
-  Classes/Layers/MainLayer/PanelLayer.h
-  Classes/Layers/Test/TestLayer.h
-  Classes/Sprites/BaseSprite.h
-  Classes/Sprites/Ball/Ball.h
-  Classes/Core/Services/Service.h
-  Classes/Maps/Chap.h
-  Classes/Maps/MyTMXLayer.h
+  Classes/Core/Controllers/BaseController.h
+  Classes/Core/Controllers/ManagerController.h
+  Classes/Core/Controllers/SceneController.h
+  Classes/Core/Scenes/BaseScene.h
+  Classes/Core/Layers/BaseLayer.h
+  Classes/Core/Sprites/BaseSprite.h
+  Classes/Core/Sprites/BaseBatchSprite.h
+  Classes/Core/Services/BaseService.h
+
+  Classes/BallsLink/Scenes/MainScene/PlayScene.h
+  Classes/BallsLink/Scenes/Test/TestScene.h
+
+  Classes/BallsLink/Layers/MainLayer/ElementLayer.h
+  Classes/BallsLink/Layers/MainLayer/PanelLayer.h
+  Classes/BallsLink/Layers/MainLayer/HolderLayer.h
+
+  Classes/BallsLink/Layers/Test/TestLayer.h
+  Classes/BallsLink/Sprites/Ball/Ball.h
+  Classes/BallsLink/Services/Service.h
+  Classes/BallsLink/Maps/Chap.h
+  Classes/BallsLink/Maps/MyTMXLayer.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

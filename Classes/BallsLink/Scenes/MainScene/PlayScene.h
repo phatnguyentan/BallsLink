@@ -16,8 +16,8 @@
 
 #include "../../Layers/MainLayer/ElementLayer.h"
 #include "../../Layers/MainLayer/PanelLayer.h"
-#include "../BaseScene.h"
-#include "../../Core/Services/Service.h"
+#include "../../../Core/Scenes/BaseScene.h"
+#include "../../Services/Service.h"
 
 
 class PlayScene : public BaseScene {

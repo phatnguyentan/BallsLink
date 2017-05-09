@@ -1,5 +1,4 @@
 #include "AppDelegate.h"
-#include "Controllers/ManagerController.h"
 
 USING_NS_CC;
 

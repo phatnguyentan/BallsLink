@@ -14,7 +14,7 @@
 #ifndef TESTSCENE_H
 #define TESTSCENE_H
 
-#include "../BaseScene.h"
+#include "../../../Core/Scenes/BaseScene.h"
 #include "../../Sprites/Ball/Ball.h"
 #include "../../Layers/Test/TestLayer.h"
 

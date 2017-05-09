@@ -14,10 +14,10 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "../BaseSprite.h"
-#include "../../Core/Services/Service.h"
+#include "../../../Core/Sprites/BaseBatchSprite.h"
+#include "../../Services/Service.h"
 
-class Ball : public BaseSprite{
+class Ball : public BaseBatchSprite{
 public:
   Ball();
   Ball(const Ball& orig);
