@@ -41,13 +41,11 @@ PanelLayer::~PanelLayer() {
 }
 
 bool PanelLayer::init() {
-  _chap = Chap::getInstance();
-  _chap->init();
+  
   setForce(true);
   initBg();
   initTiledMap();
   initEvent();
-  
   return true;
 }
 
@@ -72,12 +70,17 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-  for (ElementLayer *layer : this->_elLayers) {
-    if(layer->getActive()) {
-      layer->processEndLogic();
-      setForce(true);
+  //  Need to revert order to fill correct
+  for (int i = this->_elLayers.size() - 1; i > 0; i--) {
+    if (this->_elLayers.at(i)->getActive()) {
+      if(getNoBallsActive() > 2) {
+        this->_elLayers.at(i)->processEndLogic();
+      } else {
+        this->_elLayers.at(i)->deactive();
+      }
     }
   }
+  setForce(true);
 }
 
 
@@ -103,11 +106,7 @@ void PanelLayer::initTiledMap() {
         layer->next = NULL;
       }
       layer->setAnchorPoint(Vec2(0, 0));
-      auto scale = service->getScale();
-      layer->setPosition(Vec2(
-        service->getElSize() * i * scale + service->getPlayFrameX(), 
-        service->getElSize() * j * scale + service->getPlayFrameY()
-      ));
+      layer->setPosition(service->getElPosition(i, j));
       this->addChild(layer, kOrderElementLayer, kTagElementLayer);
       this->_elLayers.pushBack(layer);
     }
@@ -115,12 +114,13 @@ void PanelLayer::initTiledMap() {
   for (ElementLayer *layer : this->_elLayers) {
     layer->fill();
   }
-  this->_elLayers;
 }
 
 void PanelLayer::initBg() {
+  _chap = Chap::getInstance();
+  _chap->init();
   auto service = Service::getInstance();
-  _chap->getMap()->setScale(service->getScale() * 1.6);
+  _chap->getMap()->setScale(service->getScale2());
   _chap->getMap()->setPosition(Vec2(service->getPlayFrameX(), service->getPlayFrameY()));
   addChild(_chap->getMap(), kOrderBg, kTagBg);
 }
@@ -135,6 +135,7 @@ void PanelLayer::gameHandler(Touch *touch, Event *event) {
     log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
     log("row %i", target->getRow());
     log("column %i", target->getColumn());
+    log("force %d", getForce());
     if (getForce()) {
       target->active();
       setForce(false);
@@ -170,4 +171,15 @@ bool PanelLayer::allowActive(ElementLayer* layer) {
     }
   }
   return false;
+}
+
+
+int PanelLayer::getNoBallsActive() {
+  int count = 0;
+  for (ElementLayer *layer : this->_elLayers) {
+    if (layer->getActive()) {
+      count++;
+    }
+  }
+  return count;
 }

@@ -26,6 +26,7 @@ public:
   static Chap* getInstance();
   TMXTiledMap* getMap();
   Chap* init();
+  TMXLayer* getLayer();
 private:
   char* _version;
   TMXTiledMap* _map;

@@ -35,13 +35,15 @@ public:
   void gameHandler(Touch *touch, Event *event);
   bool allowActive(ElementLayer* layer);
   ElementLayer* getLayer(int row, int column);
+  
+  int getNoBallsActive();
   CC_SYNTHESIZE(bool, _force, Force);
+  
   CREATE_FUNC(PanelLayer);
   
   Vector<ElementLayer*> _elLayers;
 private:
   Chap* _chap;
-//  bool _force;
   int _ballIndex;
   
 };

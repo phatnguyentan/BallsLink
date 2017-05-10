@@ -24,6 +24,10 @@ static const char *brokenBalls[TOTAL_NUMBER_NORMAL] = {
   "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
 };
 
+static Color3B colorBalls[TOTAL_NUMBER_NORMAL] = {
+  Color3B(181, 106, 245), Color3B(245, 30, 20), Color3B(255, 210, 0), Color3B(20, 200, 220), Color3B(120, 230, 25)
+};
+
 enum {
   kTagNormal,
   kTagBroken,
@@ -63,39 +67,32 @@ void Ball::lift() {
   }
 }
 
-Ball* Ball::initBall() {
-  auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto index = (rand() % TOTAL_NUMBER_NORMAL);
-  auto sprite = Sprite::createWithSpriteFrameName(normalBalls[index]);
-  auto spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[index]);
-  spriteBroken->setVisible(false);
-  ball->index = index;
-  sprite->setAnchorPoint(Vec2(0.5, 0.5));
-  sprite->setPosition(Vec2(0, 0));
-  auto service = Service::getInstance();
-  sprite->setScale(service->getScale2());
-  ball->setPosition(Vec2(30, 200));
-  ball->addChild(sprite, 0, kTagNormal);
-  ball->addChild(spriteBroken, 1, kTagBroken);
-  auto moveTo = MoveTo::create(0.1, Vec2(30, 30));
-  auto seq = Sequence::create(moveTo, nullptr);
-  ball->runAction(seq);
-  return ball;
-}
-
 Ball* Ball::initBall(Ball* other) {
   auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
-  auto sprite = Sprite::createWithSpriteFrameName(normalBalls[other->index]);
-  auto spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[other->index]);
+  Sprite *sprite = nullptr;
+  Sprite *spriteBroken = nullptr;
+  if (other) {
+    ball->index = other->index;
+    sprite = Sprite::createWithSpriteFrameName(normalBalls[other->index]);
+    spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[other->index]);
+  } else {
+    auto index = (rand() % TOTAL_NUMBER_NORMAL);
+    ball->index = index;
+    sprite = Sprite::createWithSpriteFrameName(normalBalls[index]);
+    spriteBroken = Sprite::createWithSpriteFrameName(brokenBalls[index]);
+  }
   spriteBroken->setVisible(false);
-  ball->index = other->index;
+  
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
   sprite->setScale(service->getScale2());
-  ball->setPosition(Vec2(other->getPositionX(), other->getPositionY() + 60));
+  if (other) {
+    ball->setPosition(Vec2(other->getPositionX(), other->getPositionY() + 60));
+  } else {
+    ball->setPosition(Vec2(30, 200));
+  }
   ball->addChild(sprite, 0, kTagNormal);
   ball->addChild(spriteBroken, 1, kTagBroken);
   auto moveTo = MoveTo::create(0.1, Vec2(30, 30));
@@ -137,4 +134,8 @@ void Ball::showBreakBall() {
 void Ball::hideBreakBall() {
   getChildByTag(kTagBroken)->setVisible(false);
   getChildByTag(kTagNormal)->setVisible(true);
+}
+
+Color3B Ball::getColor() {
+  return colorBalls[index];
 }

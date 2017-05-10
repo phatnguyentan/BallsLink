@@ -33,6 +33,7 @@ public:
   void createSprite();
   void reset();
   void active();
+  void deactive();
   bool batchExist();
   bool isFill();
   void afterMove(ElementLayer *layer);

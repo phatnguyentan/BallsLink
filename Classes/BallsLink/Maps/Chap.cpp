@@ -43,4 +43,10 @@ TMXTiledMap* Chap::getMap() {
   return _map;
 }
 
+TMXLayer* Chap::getLayer() {
+  return _map->getLayer("Tile Layer 1");
+}
+
+
+
 

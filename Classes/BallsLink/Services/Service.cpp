@@ -49,16 +49,29 @@ int Service::getMapLength() {
   return 8;
 }
 
-int Service::getElSize() {
+int Service::getElRealSize() {
   return 117;
+}
+
+int Service::getElSize() {
+  return getElRealSize() * getScale();
+}
+
+Vec2 Service::getElPosition(int i, int j) {
+  return Vec2(
+        service->getElSize() * i + getPlayFrameX(), 
+        service->getElSize() * j + getPlayFrameY()
+      );
 }
 
 float Service::getPlayFrameX() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
+//  return visibleSize.width * 0.0275;
   return visibleSize.width * 0.0275;
 }
 
 float Service::getPlayFrameY() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.height * 0.323;
+//  return visibleSize.height * 0.323;
+  return visibleSize.height * 0.223;
 }

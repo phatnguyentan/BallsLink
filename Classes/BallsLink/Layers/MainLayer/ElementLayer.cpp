@@ -46,8 +46,7 @@ bool ElementLayer::init() {
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
   auto service = Service::getInstance();
-  auto scale = service->getScale();
-  _holder->changeWidthAndHeight (service->getElSize() * scale, service->getElSize() * scale);
+  _holder->changeWidthAndHeight(service->getElSize(), service->getElSize());
   _holder->setOpacity(0);
   addChild(_holder, 1, kTagHolder);
   setActive(false);
@@ -146,7 +145,13 @@ LayerColor* ElementLayer::getHolder() {
 
 void ElementLayer::active() {
   setActive(true);
-  getHolder()->setColor(Color3B(181, 106, 245));
-  getHolder()->setOpacity(100);
+  getHolder()->setColor(_batch->getColor());
+  getHolder()->setOpacity(150);
   getBatch()->lift();
+}
+
+void ElementLayer::deactive() {
+  setActive(false);
+  getHolder()->setOpacity(0);
+  getBatch()->stopLift();
 }

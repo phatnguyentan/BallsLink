@@ -28,11 +28,12 @@ public:
   void scale(float x, float y);
   MoveBy* move(float x, float y);
   void stopLift();
-  static Ball* initBall();
-  static Ball* initBall(Ball* ball);
+  static Ball* initBall(Ball* other = nullptr);
   void zoom(float x, float y);
   void showBreakBall();
   void hideBreakBall();
+  Color3B getColor();
+  
   int index;
 private:
   

@@ -30,7 +30,10 @@ public:
   float getPlayFrameX();
   float getPlayFrameY();
   int getElSize();
+  int getElRealSize();
   int getMapLength();
+  Vec2 getElPosition(int i, int j);
+  
 private:
 
 };

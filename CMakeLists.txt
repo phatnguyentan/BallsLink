@@ -152,6 +152,7 @@ set(GAME_SRC
   Classes/Core/Sprites/BaseBatchSprite.cpp
   Classes/Core/Services/BaseService.cpp
 
+  Classes/BallsLink/Config/BallsLinkConfig.cpp
   Classes/BallsLink/Scenes/MainScene/PlayScene.cpp
   Classes/BallsLink/Scenes/Test/TestScene.cpp
 
@@ -181,6 +182,7 @@ set(GAME_HEADERS
   Classes/Core/Sprites/BaseBatchSprite.h
   Classes/Core/Services/BaseService.h
 
+  Classes/BallsLink/Config/BallsLinkConfig.h
   Classes/BallsLink/Scenes/MainScene/PlayScene.h
   Classes/BallsLink/Scenes/Test/TestScene.h
 
