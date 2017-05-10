@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Core/Controllers/ManagerController.h"
+#include "Config/Config.h"
 
 /**
 @brief    The cocos2d Application.

@@ -13,10 +13,7 @@
 #include "SceneController.h"
 
 SceneController::SceneController() {
-  _current_scene = PlayScene::createScene();
-//  _current_scene = TestScene::createScene();
-  _director = cocos2d::Director::getInstance();
-  _director->runWithScene(_current_scene);
+  
 }
 
 SceneController::SceneController(const SceneController& orig) {
@@ -37,4 +34,10 @@ void SceneController::destroyInstance() {
   if (_sceneController) {
     delete _sceneController;
   }
+}
+
+void SceneController::run() {
+  _current_scene = PlayScene::createScene();
+  _director = cocos2d::Director::getInstance();
+  _director->runWithScene(_current_scene);
 }

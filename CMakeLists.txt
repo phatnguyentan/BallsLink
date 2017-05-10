@@ -140,6 +140,8 @@ if ( WIN32 )
 endif( WIN32 )
 
 set(GAME_SRC
+  Classes/Config/Config.cpp
+
   Classes/AppDelegate.cpp
   Classes/Core/Controllers/BaseController.cpp
   Classes/Core/Controllers/ManagerController.cpp
@@ -166,6 +168,9 @@ set(GAME_SRC
 )
 
 set(GAME_HEADERS
+  Classes/Config/Config.h
+  Classes/Config/Constant.h
+
   Classes/AppDelegate.h
   Classes/Core/Controllers/BaseController.h
   Classes/Core/Controllers/ManagerController.h

@@ -17,8 +17,7 @@
 #include "BaseController.h"
 #include "../../BallsLink/Scenes/MainScene/PlayScene.h"
 
-
-class SceneController : public BaseController{
+class SceneController : public BaseController {
 public:
   SceneController();
   SceneController(const SceneController& orig);
@@ -26,6 +25,8 @@ public:
   
   static SceneController* getInstance();
   static void destroyInstance();
+  
+  void run();
 private:
   cocos2d::Director* _director;
   cocos2d::Scene* _current_scene;

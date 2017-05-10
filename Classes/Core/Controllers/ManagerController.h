@@ -15,7 +15,7 @@
 #define MANAGERCONTROLLER_H
 
 #include "SceneController.h"
-
+#include "../../Config/Config.h"
 
 class ManagerController : public BaseController {
 public:
@@ -26,9 +26,11 @@ public:
   static ManagerController* getInstance();
   static void destroyInstance();
   
+  CC_SYNTHESIZE(Config*, _config, Config);
+  CC_SYNTHESIZE(SceneController*, _sceneController, SceneController);
+  
 private:
   
-  SceneController* _sceneController;
 };
 
 #endif /* MANAGERCONTROLLER_H */
