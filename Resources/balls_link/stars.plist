@@ -4,33 +4,33 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>cir_silver.png</key>
+            <key>star_up.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{1,1}</string>
                 <key>spriteSize</key>
-                <string>{61,66}</string>
+                <string>{92,89}</string>
                 <key>spriteSourceSize</key>
-                <string>{61,66}</string>
+                <string>{92,89}</string>
                 <key>textureRect</key>
-                <string>{{84,1},{61,66}}</string>
+                <string>{{1, 1}, {92,89}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>rec.png</key>
+            <key>star_down.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{1,1}</string>
                 <key>spriteSize</key>
-                <string>{81,81}</string>
+                <string>{92,89}</string>
                 <key>spriteSourceSize</key>
-                <string>{81,81}</string>
+                <string>{92,89}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{81,81}}</string>
+                <string>{{95, 8}, {92,89}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -39,18 +39,6 @@
         <dict>
             <key>format</key>
             <integer>3</integer>
-            <key>pixelFormat</key>
-            <string>RGBA8888</string>
-            <key>premultiplyAlpha</key>
-            <false/>
-            <key>realTextureFileName</key>
-            <string>number.png</string>
-            <key>size</key>
-            <string>{146,83}</string>
-            <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9b9af9152695b801a92be7dcee91e8f9:d9bcc4d7f5b0f195d223bb8d007f1f74:d500031a6472c6b000cd39ee9d0775a8$</string>
-            <key>textureFileName</key>
-            <string>number.png</string>
         </dict>
     </dict>
 </plist>

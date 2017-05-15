@@ -13,9 +13,9 @@
 
 #ifndef ELEMENTLAYER_H
 #define ELEMENTLAYER_H
-#include "../../../Core/Layers/BaseLayer.h"
-#include "../../Maps/MyTMXLayer.h"
-#include "../../Sprites/Ball/Ball.h"
+#include "../../Core/Layers/BaseLayer.h"
+#include "../Maps/MyTMXLayer.h"
+#include "../Sprites/Ball.h"
 
 class ElementLayer : public BaseLayer {
 public:

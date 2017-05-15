@@ -14,8 +14,8 @@
 #ifndef TESTLAYER_H
 #define TESTLAYER_H
 
-#include "../../../Core/Layers/BaseLayer.h"
-#include "../../Sprites/Ball/Ball.h"
+#include "../../Core/Layers/BaseLayer.h"
+#include "../Sprites/Ball.h"
 
 class TestLayer : public BaseLayer {
 public:

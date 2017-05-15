@@ -15,6 +15,7 @@
 #define SERVICE_H
 
 #include "../../Core/Services/BaseService.h"
+#include "../Config/BallsLinkConfig.h"
 
 
 class Service : public BaseService {
@@ -29,9 +30,13 @@ public:
   float getScale2();
   float getPlayFrameX();
   float getPlayFrameY();
+  Vec2 getToolBarPosition(Sprite* sprite);
+  Vec2 getStarPosition(Sprite* sprite);
+  Vec2 getHolderPosition(Sprite* sprite);
   int getElSize();
   int getElRealSize();
   int getMapLength();
+  BallsLinkConfig* getConfig();
   Vec2 getElPosition(int i, int j);
   
 private:

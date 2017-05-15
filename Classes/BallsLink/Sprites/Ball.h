@@ -14,10 +14,13 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "../../../Core/Sprites/BaseBatchSprite.h"
-#include "../../Services/Service.h"
+#include "../../Core/Sprites/BaseBatchSprite.h"
+#include "../Services/Service.h"
 
-class Ball : public BaseBatchSprite{
+#define TOTAL_NUMBER (10)
+#define TOTAL_NUMBER_NORMAL (5)
+
+class Ball : public BaseBatchSprite {
 public:
   Ball();
   Ball(const Ball& orig);
@@ -29,10 +32,14 @@ public:
   MoveBy* move(float x, float y);
   void stopLift();
   static Ball* initBall(Ball* other = nullptr);
+  static Ball* initBallWithoutAction();
   void zoom(float x, float y);
   void showBreakBall();
   void hideBreakBall();
   Color3B getColor();
+  static const char *normalBalls[TOTAL_NUMBER_NORMAL];
+  static const char *brokenBalls[TOTAL_NUMBER_NORMAL];
+  static Color3B colorBalls[TOTAL_NUMBER_NORMAL];
   
   int index;
 private:

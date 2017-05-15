@@ -13,23 +13,23 @@
 
 #include "Ball.h"
 
-#define TOTAL_NUMBER (10)
-#define TOTAL_NUMBER_NORMAL (5)
 
-static const char *normalBalls[TOTAL_NUMBER_NORMAL] = {
-  "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
-};
 
-static const char *brokenBalls[TOTAL_NUMBER_NORMAL] = {
-  "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
-};
+//static const char *normalBalls[TOTAL_NUMBER_NORMAL] = {
+//  "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
+//};
 
-static Color3B colorBalls[TOTAL_NUMBER_NORMAL] = {
-  Color3B(181, 106, 245), Color3B(245, 30, 20), Color3B(255, 210, 0), Color3B(20, 200, 220), Color3B(120, 230, 25)
-};
+//static const char *brokenBalls[TOTAL_NUMBER_NORMAL] = {
+//  "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
+//};
+
+//static Color3B colorBalls[TOTAL_NUMBER_NORMAL] = {
+//  Color3B(181, 106, 245), Color3B(245, 30, 20), Color3B(255, 210, 0), Color3B(20, 200, 220), Color3B(120, 230, 25)
+//};
 
 enum {
   kTagNormal,
+  kTagLabel,
   kTagBroken,
   kTagLift
 };
@@ -44,6 +44,18 @@ Ball::Ball(const Ball& orig) {
 Ball::~Ball() {
   
 }
+
+const char *Ball::normalBalls[] = {
+  "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
+};
+
+const char *Ball::brokenBalls[] = {
+  "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
+};
+
+Color3B Ball::colorBalls[TOTAL_NUMBER_NORMAL] = {
+  Color3B(181, 106, 245), Color3B(245, 30, 20), Color3B(255, 210, 0), Color3B(20, 200, 220), Color3B(120, 230, 25)
+};
 
 void Ball::lift() {
   auto service = Service::getInstance();
@@ -98,6 +110,23 @@ Ball* Ball::initBall(Ball* other) {
   auto moveTo = MoveTo::create(0.1, Vec2(30, 30));
   auto seq = Sequence::create(moveTo, nullptr);
   ball->runAction(seq);
+  return ball;
+}
+
+Ball* Ball::initBallWithoutAction() {
+  auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
+  Sprite *sprite = nullptr;
+  auto index = (rand() % TOTAL_NUMBER_NORMAL);
+  ball->index = index;
+  sprite = Sprite::createWithSpriteFrameName(normalBalls[index]);
+  
+  sprite->setPosition(Vec2(0, 0));
+  auto service = Service::getInstance();
+  sprite->setScale(service->getScale2());
+  
+  ball->addChild(sprite, 0, kTagNormal);
+
   return ball;
 }
 

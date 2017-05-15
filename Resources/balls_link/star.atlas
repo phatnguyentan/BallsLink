@@ -1,19 +1,19 @@
 
-sprites.png
+star.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-rec
+star_up
   rotate: false
   xy: 1, 1
-  size: 81, 81
-  orig: 81, 81
+  size: 92, 89
+  orig: 92, 89
   offset: 0, 0
   index: -1
-cir_silver
+star_down
   rotate: false
-  xy: 84, 16
-  size: 61, 66
-  orig: 61, 66
+  xy: 95, 8
+  size: 85, 82
+  orig: 85, 82
   offset: 0, 0
   index: -1

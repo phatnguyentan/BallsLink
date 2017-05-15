@@ -37,12 +37,11 @@ float Service::getScale(Size size) {
 
 float Service::getScale() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width / 1000;
+  return visibleSize.width / 1080;
 }
 
 float Service::getScale2() {
-  Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width / 1000 * 1.6;
+  return getScale() * 1.75;
 }
 
 int Service::getMapLength() {
@@ -54,7 +53,7 @@ int Service::getElRealSize() {
 }
 
 int Service::getElSize() {
-  return getElRealSize() * getScale();
+  return getElRealSize() * getScale() * 1.1;
 }
 
 Vec2 Service::getElPosition(int i, int j) {
@@ -66,12 +65,29 @@ Vec2 Service::getElPosition(int i, int j) {
 
 float Service::getPlayFrameX() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-//  return visibleSize.width * 0.0275;
-  return visibleSize.width * 0.0275;
+  return visibleSize.width * 0.03;
 }
 
 float Service::getPlayFrameY() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-//  return visibleSize.height * 0.323;
   return visibleSize.height * 0.223;
+}
+
+Vec2 Service::getToolBarPosition(Sprite* sprite) {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  return Vec2(0, visibleSize.height + (0.12 * sprite->getContentSize().height));
+}
+
+Vec2 Service::getStarPosition(Sprite* sprite) {
+  auto size =  sprite->getContentSize();
+  return Vec2(size.width * 0.03, - size.height * 0.68);
+}
+
+Vec2 Service::getHolderPosition(Sprite* sprite) {
+  auto pos = getToolBarPosition(sprite);
+  return Vec2(pos.x + ((sprite->getContentSize().width * 0.28)), pos.y - (sprite->getContentSize().height * 0.36));
+}
+
+BallsLinkConfig* Service::getConfig() {
+  return BallsLinkConfig::getInstance();
 }

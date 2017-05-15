@@ -1,0 +1,75 @@
+
+balls.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+02green_broken
+  rotate: false
+  xy: 1, 98
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+02yellow_broken
+  rotate: false
+  xy: 153, 98
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+02purple_broken
+  rotate: false
+  xy: 305, 98
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+02red_broken
+  rotate: false
+  xy: 457, 98
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+02blue_broken
+  rotate: false
+  xy: 609, 98
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+01green
+  rotate: false
+  xy: 1, 1
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1
+01purple
+  rotate: false
+  xy: 761, 153
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1
+01blue
+  rotate: false
+  xy: 98, 1
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1
+01red
+  rotate: false
+  xy: 858, 153
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1
+01yellow
+  rotate: false
+  xy: 195, 1
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1

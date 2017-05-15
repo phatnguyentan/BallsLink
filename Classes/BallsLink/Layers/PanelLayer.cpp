@@ -21,12 +21,14 @@ enum
     kTagBatch,
     kTagHolder,
     kTagNumber,
+    kTagToolBarLayer,
 };
 
 enum 
 {
     kOrderBg,
     kOrderElementLayer,
+    kOrderToolBarLayer,
 };
 
 
@@ -41,10 +43,10 @@ PanelLayer::~PanelLayer() {
 }
 
 bool PanelLayer::init() {
-  
   setForce(true);
   initBg();
   initTiledMap();
+  initTopToolbar();
   initEvent();
   return true;
 }
@@ -70,10 +72,11 @@ bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
+  auto service = Service::getInstance();
   //  Need to revert order to fill correct
-  for (int i = this->_elLayers.size() - 1; i > 0; i--) {
+  for (int i = this->_elLayers.size() - 1; i >= 0; i--) {
     if (this->_elLayers.at(i)->getActive()) {
-      if(getNoBallsActive() > 2) {
+      if(getNoBallsActive() >= service->getConfig()->thresholdBallsCanRemove) {
         this->_elLayers.at(i)->processEndLogic();
       } else {
         this->_elLayers.at(i)->deactive();
@@ -173,7 +176,6 @@ bool PanelLayer::allowActive(ElementLayer* layer) {
   return false;
 }
 
-
 int PanelLayer::getNoBallsActive() {
   int count = 0;
   for (ElementLayer *layer : this->_elLayers) {
@@ -182,4 +184,9 @@ int PanelLayer::getNoBallsActive() {
     }
   }
   return count;
+}
+
+void PanelLayer::initTopToolbar(){
+  auto layer = TopToolbarLayer::create();
+  this->addChild(layer, kOrderToolBarLayer, kTagToolBarLayer);
 }

@@ -14,9 +14,9 @@
 #ifndef TESTSCENE_H
 #define TESTSCENE_H
 
-#include "../../../Core/Scenes/BaseScene.h"
-#include "../../Sprites/Ball/Ball.h"
-#include "../../Layers/Test/TestLayer.h"
+#include "../../Core/Scenes/BaseScene.h"
+#include "../Sprites/Ball.h"
+#include "../Layers/TestLayer.h"
 
 class TestScene : public BaseScene {
 public:

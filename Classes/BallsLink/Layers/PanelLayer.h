@@ -15,10 +15,11 @@
 #define PANELLAYER_H
 
 #include "ElementLayer.h"
-#include "../../Maps/Chap.h"
-#include "../../Maps/MyTMXLayer.h"
-#include "../../../Core/Layers/BaseLayer.h"
-#include "../../Sprites/Ball/Ball.h"
+#include "../Maps/Chap.h"
+#include "../Maps/MyTMXLayer.h"
+#include "../../Core/Layers/BaseLayer.h"
+#include "../Sprites/Ball.h"
+#include "TopToolbarLayer.h"
 
 class PanelLayer : public BaseLayer {
 public:
@@ -32,6 +33,7 @@ public:
   void onTouchEnded(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
   void initBg();
+  void initTopToolbar();
   void gameHandler(Touch *touch, Event *event);
   bool allowActive(ElementLayer* layer);
   ElementLayer* getLayer(int row, int column);

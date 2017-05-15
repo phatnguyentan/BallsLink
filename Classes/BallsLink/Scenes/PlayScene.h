@@ -14,10 +14,10 @@
 #ifndef PLAYSCENE_H
 #define PLAYSCENE_H
 
-#include "../../Layers/MainLayer/ElementLayer.h"
-#include "../../Layers/MainLayer/PanelLayer.h"
-#include "../../../Core/Scenes/BaseScene.h"
-#include "../../Services/Service.h"
+#include "../Layers/ElementLayer.h"
+#include "../Layers/PanelLayer.h"
+#include "../../Core/Scenes/BaseScene.h"
+#include "../Services/Service.h"
 
 
 class PlayScene : public BaseScene {

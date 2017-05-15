@@ -153,15 +153,15 @@ set(GAME_SRC
   Classes/Core/Services/BaseService.cpp
 
   Classes/BallsLink/Config/BallsLinkConfig.cpp
-  Classes/BallsLink/Scenes/MainScene/PlayScene.cpp
-  Classes/BallsLink/Scenes/Test/TestScene.cpp
+  Classes/BallsLink/Scenes/PlayScene.cpp
+  Classes/BallsLink/Scenes/TestScene.cpp
 
-  Classes/BallsLink/Layers/MainLayer/ElementLayer.cpp
-  Classes/BallsLink/Layers/MainLayer/PanelLayer.cpp
-  Classes/BallsLink/Layers/MainLayer/HolderLayer.cpp
+  Classes/BallsLink/Layers/ElementLayer.cpp
+  Classes/BallsLink/Layers/PanelLayer.cpp
+  Classes/BallsLink/Layers/TopToolbarLayer.cpp
+  Classes/BallsLink/Layers/TestLayer.cpp
 
-  Classes/BallsLink/Layers/Test/TestLayer.cpp
-  Classes/BallsLink/Sprites/Ball/Ball.cpp
+  Classes/BallsLink/Sprites/Ball.cpp
   Classes/BallsLink/Services/Service.cpp
   Classes/BallsLink/Maps/Chap.cpp
   Classes/BallsLink/Maps/MyTMXLayer.cpp
@@ -183,15 +183,15 @@ set(GAME_HEADERS
   Classes/Core/Services/BaseService.h
 
   Classes/BallsLink/Config/BallsLinkConfig.h
-  Classes/BallsLink/Scenes/MainScene/PlayScene.h
-  Classes/BallsLink/Scenes/Test/TestScene.h
+  Classes/BallsLink/Scenes/PlayScene.h
+  Classes/BallsLink/Scenes/TestScene.h
 
-  Classes/BallsLink/Layers/MainLayer/ElementLayer.h
-  Classes/BallsLink/Layers/MainLayer/PanelLayer.h
-  Classes/BallsLink/Layers/MainLayer/HolderLayer.h
+  Classes/BallsLink/Layers/ElementLayer.h
+  Classes/BallsLink/Layers/PanelLayer.h
+  Classes/BallsLink/Layers/TopToolbarLayer.h
+  Classes/BallsLink/Layers/TestLayer.h
 
-  Classes/BallsLink/Layers/Test/TestLayer.h
-  Classes/BallsLink/Sprites/Ball/Ball.h
+  Classes/BallsLink/Sprites/Ball.h
   Classes/BallsLink/Services/Service.h
   Classes/BallsLink/Maps/Chap.h
   Classes/BallsLink/Maps/MyTMXLayer.h
