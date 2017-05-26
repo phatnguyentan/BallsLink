@@ -14,6 +14,7 @@
 #ifndef PANELLAYER_H
 #define PANELLAYER_H
 
+#include "../Services/Service.h"
 #include "ElementLayer.h"
 #include "../Maps/Chap.h"
 #include "../Maps/MyTMXLayer.h"

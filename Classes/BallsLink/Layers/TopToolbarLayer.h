@@ -15,6 +15,7 @@
 #define TOPTOOLBARLAYER_H
 
 #include "../../Core/Layers/BaseLayer.h"
+#include "../Services/Service.h"
 #include "../Sprites/Ball.h"
 
 class TopToolbarLayer : public BaseLayer {
@@ -36,7 +37,20 @@ public:
     tagHolder,
     tagBall,
     tagLabel,
+  };
+  enum BallType {
+    purple,
+    red,
+    yellow,
+    blue,
+    green,
   }; 
+  
+  std::vector<std::vector<int>> allAc 
+  { { BallType::blue, BallType::purple, BallType::red, BallType::green },
+  { BallType::purple, BallType::blue, BallType::yellow, BallType::red } };
+  
+  Vector<Ball*> balls;
   
   TopToolbarLayer();
   TopToolbarLayer(const TopToolbarLayer& orig);
@@ -44,6 +58,7 @@ public:
   void generateStar();
   void generateAC();
   void generateTimes();
+  Ball* getBallByIndex(int index);
   virtual bool init() override;
   CC_SYNTHESIZE(Vector<Sprite*>, _stars, Stars);
   CC_SYNTHESIZE(Sprite*, _bg, Bg);

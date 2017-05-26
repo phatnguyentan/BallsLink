@@ -113,11 +113,10 @@ Ball* Ball::initBall(Ball* other) {
   return ball;
 }
 
-Ball* Ball::initBallWithoutAction() {
-  auto ball = (Ball*) SpriteBatchNode::create("sprites/balls.png", 2);
+Ball* Ball::initBallWithIndex(int index) {
+  auto ball = (Ball*)SpriteBatchNode::create("sprites/balls.png", 2);
   SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprites/balls.plist");
   Sprite *sprite = nullptr;
-  auto index = (rand() % TOTAL_NUMBER_NORMAL);
   ball->index = index;
   sprite = Sprite::createWithSpriteFrameName(normalBalls[index]);
   

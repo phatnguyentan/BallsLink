@@ -27,8 +27,8 @@ enum
 enum 
 {
     kOrderBg,
-    kOrderElementLayer,
     kOrderToolBarLayer,
+    kOrderElementLayer,
 };
 
 
@@ -45,8 +45,8 @@ PanelLayer::~PanelLayer() {
 bool PanelLayer::init() {
   setForce(true);
   initBg();
-  initTiledMap();
   initTopToolbar();
+  initTiledMap();
   initEvent();
   return true;
 }
@@ -77,7 +77,7 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (int i = this->_elLayers.size() - 1; i >= 0; i--) {
     if (this->_elLayers.at(i)->getActive()) {
       if(getNoBallsActive() >= service->getConfig()->thresholdBallsCanRemove) {
-        this->_elLayers.at(i)->processEndLogic();
+        this->_elLayers.at(i)->processEndLogic((TopToolbarLayer*)getChildByTag(kTagToolBarLayer));
       } else {
         this->_elLayers.at(i)->deactive();
       }
@@ -135,10 +135,10 @@ void PanelLayer::gameHandler(Touch *touch, Event *event) {
   Rect rect = Rect(0, 0, s.width, s.height);
   if (rect.containsPoint(locationInNode))
   {
-    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-    log("row %i", target->getRow());
-    log("column %i", target->getColumn());
-    log("force %d", getForce());
+//    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
+//    log("row %i", target->getRow());
+//    log("column %i", target->getColumn());
+//    log("force %d", getForce());
     if (getForce()) {
       target->active();
       setForce(false);

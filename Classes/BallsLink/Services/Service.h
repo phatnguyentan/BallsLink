@@ -30,15 +30,16 @@ public:
   float getScale2();
   float getPlayFrameX();
   float getPlayFrameY();
-  Vec2 getToolBarPosition(Sprite* sprite);
-  Vec2 getStarPosition(Sprite* sprite);
-  Vec2 getHolderPosition(Sprite* sprite);
+  Vec2 getToolBarPosition();
+  Vec2 getStarPosition();
+  Vec2 getHolderPosition();
   int getElSize();
   int getElRealSize();
   int getMapLength();
   BallsLinkConfig* getConfig();
   Vec2 getElPosition(int i, int j);
   
+  CC_SYNTHESIZE(Sprite*, _toolbarBg, ToolbarBg);
 private:
 
 };

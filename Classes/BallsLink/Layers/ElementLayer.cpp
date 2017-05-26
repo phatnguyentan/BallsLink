@@ -100,13 +100,15 @@ void ElementLayer::createSprite() {
   addBatch();
 }
 
-void ElementLayer::processEndLogic() {
-  getBatch()->showBreakBall();
-  auto delay = DelayTime::create(0.2);
+void ElementLayer::processEndLogic(TopToolbarLayer* toolbar) {
+  setToolbar(toolbar);
+  getBatch()->setScale(0.9);
+  auto move = CallFunc::create(CC_CALLBACK_0(ElementLayer::moveBatch, this));
+  auto delay = DelayTime::create(0.3);
   auto remove = CallFunc::create(CC_CALLBACK_0(ElementLayer::removeBatch, this));
   auto fillAll = CallFunc::create(CC_CALLBACK_0(ElementLayer::fillAll, this));
   auto reset = CallFunc::create(CC_CALLBACK_0(ElementLayer::reset, this));
-  auto seq = Sequence::create(delay, remove, fillAll, reset, nullptr);
+  auto seq = Sequence::create(move, delay, remove, fillAll, reset, nullptr);
   seq->setTag(kActionRemove);
   if (this->getActionByTag(kActionRemove)) {
     seq->startWithTarget(this);
@@ -118,6 +120,18 @@ void ElementLayer::processEndLogic() {
 void ElementLayer::removeBatch() {
   if (batchExist()) {
     this->_holder->removeChildByTag(kTagBatch);
+  }
+}
+
+void ElementLayer::moveBatch() {
+  auto service = Service::getInstance();
+  auto ballAc = getToolbar()->getBallByIndex(getBatch()->index);
+  if (ballAc) {
+    auto pos = ballAc->getPosition();
+    auto currentPos = convertToWorldSpace(getBatch()->getPosition());
+    auto moveTo = MoveTo::create(0.2, Vec2(pos.x - currentPos.x, pos.y - currentPos.y));
+    auto seq = Sequence::create(moveTo, nullptr);
+    getBatch()->runAction(seq);
   }
 }
 

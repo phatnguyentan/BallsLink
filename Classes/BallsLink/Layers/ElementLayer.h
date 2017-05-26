@@ -15,7 +15,9 @@
 #define ELEMENTLAYER_H
 #include "../../Core/Layers/BaseLayer.h"
 #include "../Maps/MyTMXLayer.h"
+#include "../Services/Service.h"
 #include "../Sprites/Ball.h"
+#include "TopToolbarLayer.h"
 
 class ElementLayer : public BaseLayer {
 public:
@@ -26,8 +28,9 @@ public:
   virtual bool init() override;
   void fill();
   void fillAll();
-  void processEndLogic();
+  void processEndLogic(TopToolbarLayer* toolbar);
   void removeBatch();
+  void moveBatch();
   void addBatch();
   void createSprite(Ball *sprite);
   void createSprite();
@@ -44,6 +47,7 @@ public:
   CC_SYNTHESIZE(int, _column, Column);
   CC_SYNTHESIZE(bool, _active, Active);
   CC_SYNTHESIZE(Ball*, _batch, Batch);
+  CC_SYNTHESIZE(TopToolbarLayer*, _toolbar, Toolbar);
   
   CREATE_FUNC(ElementLayer);
   

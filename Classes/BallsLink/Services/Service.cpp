@@ -73,19 +73,19 @@ float Service::getPlayFrameY() {
   return visibleSize.height * 0.223;
 }
 
-Vec2 Service::getToolBarPosition(Sprite* sprite) {
+Vec2 Service::getToolBarPosition() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return Vec2(0, visibleSize.height + (0.12 * sprite->getContentSize().height));
+  return Vec2(0, visibleSize.height + (0.12 * getToolbarBg()->getContentSize().height));
 }
 
-Vec2 Service::getStarPosition(Sprite* sprite) {
-  auto size =  sprite->getContentSize();
+Vec2 Service::getStarPosition() {
+  auto size =  getToolbarBg()->getContentSize();
   return Vec2(size.width * 0.03, - size.height * 0.68);
 }
 
-Vec2 Service::getHolderPosition(Sprite* sprite) {
-  auto pos = getToolBarPosition(sprite);
-  return Vec2(pos.x + ((sprite->getContentSize().width * 0.28)), pos.y - (sprite->getContentSize().height * 0.36));
+Vec2 Service::getHolderPosition() {
+  auto pos = getToolBarPosition();
+  return Vec2(pos.x + ((getToolbarBg()->getContentSize().width * 0.28)), pos.y - (getToolbarBg()->getContentSize().height * 0.36));
 }
 
 BallsLinkConfig* Service::getConfig() {

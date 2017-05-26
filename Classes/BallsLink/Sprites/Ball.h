@@ -32,7 +32,7 @@ public:
   MoveBy* move(float x, float y);
   void stopLift();
   static Ball* initBall(Ball* other = nullptr);
-  static Ball* initBallWithoutAction();
+  static Ball* initBallWithIndex(int index);
   void zoom(float x, float y);
   void showBreakBall();
   void hideBreakBall();
