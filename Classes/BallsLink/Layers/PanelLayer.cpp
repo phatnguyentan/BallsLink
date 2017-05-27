@@ -22,6 +22,7 @@ enum
     kTagHolder,
     kTagNumber,
     kTagToolBarLayer,
+    kTagPopup,
 };
 
 enum 
@@ -29,6 +30,7 @@ enum
     kOrderBg,
     kOrderToolBarLayer,
     kOrderElementLayer,
+    kOrderPopup,
 };
 
 
@@ -48,6 +50,7 @@ bool PanelLayer::init() {
   initTopToolbar();
   initTiledMap();
   initEvent();
+  initPopup();
   return true;
 }
 
@@ -67,16 +70,19 @@ void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
+  
   gameHandler(touch, event);
   return true;
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-  auto service = Service::getInstance();
+//  getPopup()->appear();
+//  getPopup()->disappear();
+//  auto service = Service::getInstance();
   //  Need to revert order to fill correct
   for (int i = this->_elLayers.size() - 1; i >= 0; i--) {
     if (this->_elLayers.at(i)->getActive()) {
-      if(getNoBallsActive() >= service->getConfig()->thresholdBallsCanRemove) {
+      if(getNoBallsActive() >= Balls_Link_Threshold_Balls_Can_Remove) {
         this->_elLayers.at(i)->processEndLogic((TopToolbarLayer*)getChildByTag(kTagToolBarLayer));
       } else {
         this->_elLayers.at(i)->deactive();
@@ -85,7 +91,6 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   }
   setForce(true);
 }
-
 
 void PanelLayer::initTiledMap() {
   auto service = Service::getInstance();
@@ -189,4 +194,9 @@ int PanelLayer::getNoBallsActive() {
 void PanelLayer::initTopToolbar(){
   auto layer = TopToolbarLayer::create();
   this->addChild(layer, kOrderToolBarLayer, kTagToolBarLayer);
+}
+
+void PanelLayer::initPopup() {
+  setPopup(PopupEndChapter::create());
+  addChild(getPopup(), kOrderPopup, kTagPopup);
 }

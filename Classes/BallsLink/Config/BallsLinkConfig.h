@@ -16,19 +16,7 @@
 
 #include "../../Config/Config.h"
 
-class BallsLinkConfig : public Config{
-public:
-  BallsLinkConfig();
-  BallsLinkConfig(const BallsLinkConfig& orig);
-  virtual ~BallsLinkConfig();
-  
-  static BallsLinkConfig* getInstance();
-  static void destroyInstance();
-  
-  int thresholdBallsCanRemove = 3;
-private:
-
-};
+#define Balls_Link_Threshold_Balls_Can_Remove (3)
 
 #endif /* BALLSLINKCONFIG_H */
 

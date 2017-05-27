@@ -87,7 +87,3 @@ Vec2 Service::getHolderPosition() {
   auto pos = getToolBarPosition();
   return Vec2(pos.x + ((getToolbarBg()->getContentSize().width * 0.28)), pos.y - (getToolbarBg()->getContentSize().height * 0.36));
 }
-
-BallsLinkConfig* Service::getConfig() {
-  return BallsLinkConfig::getInstance();
-}

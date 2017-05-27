@@ -15,21 +15,11 @@
 #define CONFIG_H
 
 #include "cocos2d.h"
-#include "Constant.h"
 
-class Config {
-public:
-  Config();
-  Config(const Config& orig);
-  virtual ~Config();
-  
-  static Config* getInstance();
-  static void destroyInstance();
-  
-  std::string currentGame = CONST_BALLS_LINK_NAME;
-private:
+#define CONST_BALLS_LINK_NAME "balls_link"
 
-};
+#define CURRENT_GAME CONST_BALLS_LINK_NAME
+
 
 #endif /* CONFIG_H */
 

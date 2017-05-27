@@ -124,12 +124,11 @@ void ElementLayer::removeBatch() {
 }
 
 void ElementLayer::moveBatch() {
-  auto service = Service::getInstance();
   auto ballAc = getToolbar()->getBallByIndex(getBatch()->index);
   if (ballAc) {
     auto pos = ballAc->getPosition();
     auto currentPos = convertToWorldSpace(getBatch()->getPosition());
-    auto moveTo = MoveTo::create(0.2, Vec2(pos.x - currentPos.x, pos.y - currentPos.y));
+    auto moveTo = MoveTo::create(0.2, Vec2(pos.x - currentPos.x + 30, pos.y - currentPos.y + 30));
     auto seq = Sequence::create(moveTo, nullptr);
     getBatch()->runAction(seq);
   }

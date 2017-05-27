@@ -36,7 +36,6 @@ public:
   int getElSize();
   int getElRealSize();
   int getMapLength();
-  BallsLinkConfig* getConfig();
   Vec2 getElPosition(int i, int j);
   
   CC_SYNTHESIZE(Sprite*, _toolbarBg, ToolbarBg);

@@ -72,9 +72,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    auto config = Config::getInstance();
     auto manager = ManagerController::getInstance();
-    manager->setConfig(config);
     manager->getSceneController()->run();
 
     return true;

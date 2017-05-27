@@ -26,7 +26,6 @@ public:
   static ManagerController* getInstance();
   static void destroyInstance();
   
-  CC_SYNTHESIZE(Config*, _config, Config);
   CC_SYNTHESIZE(SceneController*, _sceneController, SceneController);
   
 private:

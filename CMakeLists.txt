@@ -140,7 +140,6 @@ if ( WIN32 )
 endif( WIN32 )
 
 set(GAME_SRC
-  Classes/Config/Config.cpp
 
   Classes/AppDelegate.cpp
   Classes/Core/Controllers/BaseController.cpp
@@ -152,7 +151,8 @@ set(GAME_SRC
   Classes/Core/Sprites/BaseBatchSprite.cpp
   Classes/Core/Services/BaseService.cpp
 
-  Classes/BallsLink/Config/BallsLinkConfig.cpp
+  Classes/Libs/Popup/Popup.cpp
+
   Classes/BallsLink/Scenes/PlayScene.cpp
   Classes/BallsLink/Scenes/TestScene.cpp
 
@@ -160,6 +160,7 @@ set(GAME_SRC
   Classes/BallsLink/Layers/PanelLayer.cpp
   Classes/BallsLink/Layers/TopToolbarLayer.cpp
   Classes/BallsLink/Layers/TestLayer.cpp
+  Classes/BallsLink/Layers/PopupEndChapter.cpp
 
   Classes/BallsLink/Sprites/Ball.cpp
   Classes/BallsLink/Services/Service.cpp
@@ -170,7 +171,6 @@ set(GAME_SRC
 
 set(GAME_HEADERS
   Classes/Config/Config.h
-  Classes/Config/Constant.h
 
   Classes/AppDelegate.h
   Classes/Core/Controllers/BaseController.h
@@ -182,6 +182,8 @@ set(GAME_HEADERS
   Classes/Core/Sprites/BaseBatchSprite.h
   Classes/Core/Services/BaseService.h
 
+  Classes/Libs/Popup/Popup.h
+
   Classes/BallsLink/Config/BallsLinkConfig.h
   Classes/BallsLink/Scenes/PlayScene.h
   Classes/BallsLink/Scenes/TestScene.h
@@ -190,6 +192,7 @@ set(GAME_HEADERS
   Classes/BallsLink/Layers/PanelLayer.h
   Classes/BallsLink/Layers/TopToolbarLayer.h
   Classes/BallsLink/Layers/TestLayer.h
+  Classes/BallsLink/Layers/PopupEndChapter.h
 
   Classes/BallsLink/Sprites/Ball.h
   Classes/BallsLink/Services/Service.h

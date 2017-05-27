@@ -21,6 +21,7 @@
 #include "../../Core/Layers/BaseLayer.h"
 #include "../Sprites/Ball.h"
 #include "TopToolbarLayer.h"
+#include "PopupEndChapter.h"
 
 class PanelLayer : public BaseLayer {
 public:
@@ -30,6 +31,7 @@ public:
   virtual bool init() override;
   void initTiledMap();
   void initEvent();
+  void initPopup();
   void onTouchMoved(Touch *touch, Event *event);
   void onTouchEnded(Touch *touch, Event *event);
   bool onTouchBegan(Touch *touch, Event *event);
@@ -41,6 +43,7 @@ public:
   
   int getNoBallsActive();
   CC_SYNTHESIZE(bool, _force, Force);
+  CC_SYNTHESIZE(PopupEndChapter*, _popup, Popup);
   
   CREATE_FUNC(PanelLayer);
   
