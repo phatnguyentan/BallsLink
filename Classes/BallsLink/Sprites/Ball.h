@@ -36,12 +36,19 @@ public:
   void zoom(float x, float y);
   void showBreakBall();
   void hideBreakBall();
+  std::string getStringLabel();
   Color3B getColor();
   static const char *normalBalls[TOTAL_NUMBER_NORMAL];
   static const char *brokenBalls[TOTAL_NUMBER_NORMAL];
   static Color3B colorBalls[TOTAL_NUMBER_NORMAL];
   
   int index;
+  int toolbarNoBallsInit;
+  int toolbarNoBalls;
+  Label* toolbarLabel;
+  
+//  CC_SYNTHESIZE(int, _toolbarNoBallsInit, ToolbarNoBallsInit);
+//  CC_SYNTHESIZE(int, _toolbarNoBalls, ToolbarNoBalls);
 private:
   
 };

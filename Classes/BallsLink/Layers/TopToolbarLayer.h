@@ -17,6 +17,7 @@
 #include "../../Core/Layers/BaseLayer.h"
 #include "../Services/Service.h"
 #include "../Sprites/Ball.h"
+#include "BallLayer.h"
 
 class TopToolbarLayer : public BaseLayer {
 public:
@@ -46,11 +47,22 @@ public:
     green,
   }; 
   
+  enum NoBalls {
+    frist = 15,
+    second = 18,
+    third = 12,
+    fourth = 20,
+  }; 
+  
   std::vector<std::vector<int>> allAc 
   { { BallType::blue, BallType::purple, BallType::red, BallType::green },
   { BallType::purple, BallType::blue, BallType::yellow, BallType::red } };
   
-  Vector<Ball*> balls;
+  std::vector<std::vector<int>> allNoBalls 
+  { { NoBalls::frist, NoBalls::second, NoBalls::third, NoBalls::fourth },
+  { NoBalls::third, NoBalls::fourth, NoBalls::frist, NoBalls::second } };
+  
+  Vector<BallLayer*> balls;
   
   TopToolbarLayer();
   TopToolbarLayer(const TopToolbarLayer& orig);
@@ -58,10 +70,13 @@ public:
   void generateStar();
   void generateAC();
   void generateTimes();
-  Ball* getBallByIndex(int index);
+  void processEnd();
+  BallLayer* getBallByIndex(int index);
   virtual bool init() override;
   CC_SYNTHESIZE(Vector<Sprite*>, _stars, Stars);
   CC_SYNTHESIZE(Sprite*, _bg, Bg);
+  CC_SYNTHESIZE(int, _times, Times);
+  CC_SYNTHESIZE(Label*, _timesLabel, TimesLabel);
   CREATE_FUNC(TopToolbarLayer);
 private:
 

@@ -42,6 +42,7 @@ PanelLayer::PanelLayer(const PanelLayer& orig) {
 }
 
 PanelLayer::~PanelLayer() {
+  _elLayers.clear();
 }
 
 bool PanelLayer::init() {
@@ -58,11 +59,8 @@ void PanelLayer::initEvent() {
   auto eventListener = EventListenerTouchOneByOne::create();
   eventListener->onTouchBegan = CC_CALLBACK_2(PanelLayer::onTouchBegan, this);
   eventListener->onTouchMoved = CC_CALLBACK_2(PanelLayer::onTouchMoved, this);
-  eventListener->onTouchEnded = CC_CALLBACK_2(ElementLayer::onTouchEnded, this);
-  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, this->_elLayers.at(0));
-  for (int i = 1; i < this->_elLayers.size(); i++) {
-    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener->clone(), this->_elLayers.at(i));
-  }
+  eventListener->onTouchEnded = CC_CALLBACK_2(PanelLayer::onTouchEnded, this);
+  this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener, this);
 }
 
 void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
@@ -70,25 +68,30 @@ void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
-  
+  getPopup()->appear();
   gameHandler(touch, event);
   return true;
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-//  getPopup()->appear();
-//  getPopup()->disappear();
+  getPopup()->disappear();
 //  auto service = Service::getInstance();
   //  Need to revert order to fill correct
+  auto toolbar = (TopToolbarLayer*)getChildByTag(kTagToolBarLayer);
+  auto isProcces = false;
   for (int i = this->_elLayers.size() - 1; i >= 0; i--) {
     if (this->_elLayers.at(i)->getActive()) {
       if(getNoBallsActive() >= Balls_Link_Threshold_Balls_Can_Remove) {
         this->_elLayers.at(i)->processEndLogic((TopToolbarLayer*)getChildByTag(kTagToolBarLayer));
+        isProcces = true;
       } else {
         this->_elLayers.at(i)->deactive();
       }
     }
   }
+  if (isProcces) {
+    toolbar->processEnd();
+  } 
   setForce(true);
 }
 
@@ -134,23 +137,25 @@ void PanelLayer::initBg() {
 }
 
 void PanelLayer::gameHandler(Touch *touch, Event *event) {
-  auto target = static_cast<ElementLayer*>(event->getCurrentTarget());
-  Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
-  Size s = target->getHolder()->getContentSize();
-  Rect rect = Rect(0, 0, s.width, s.height);
-  if (rect.containsPoint(locationInNode))
-  {
-//    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-//    log("row %i", target->getRow());
-//    log("column %i", target->getColumn());
-//    log("force %d", getForce());
-    if (getForce()) {
-      target->active();
-      setForce(false);
-      _ballIndex = target->getBatch()->index;
-    } else {
-      if (target->getBatch()->index == _ballIndex && allowActive(target)) {
+  auto panel = (PanelLayer*)(event->getCurrentTarget());
+  for (ElementLayer* target: panel->_elLayers) {
+    Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+    Size s = target->getHolder()->getContentSize();
+    Rect rect = Rect(0, 0, s.width, s.height);
+    if (rect.containsPoint(locationInNode))
+    {
+  //    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
+  //    log("row %i", target->getRow());
+  //    log("column %i", target->getColumn());
+  //    log("force %d", getForce());
+      if (getForce()) {
         target->active();
+        setForce(false);
+        _ballIndex = target->getBatch()->index;
+      } else {
+        if (target->getBatch()->index == _ballIndex && allowActive(target)) {
+          target->active();
+        }
       }
     }
   }

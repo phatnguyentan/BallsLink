@@ -29,7 +29,7 @@ TopToolbarLayer::~TopToolbarLayer() {
 
 bool TopToolbarLayer::init() {
   auto service = Service::getInstance();
-  auto sprite = Sprite::create("balls_link/toolbar.png");
+  auto sprite = Sprite::create(Balls_Link_Toolbar_Bg_Src);
   sprite->setScale(service->getScale2());
   sprite->setAnchorPoint(Vec2(0, 1));
   service->setToolbarBg(sprite);
@@ -44,8 +44,8 @@ bool TopToolbarLayer::init() {
 
 void TopToolbarLayer::generateStar() {
   auto service = Service::getInstance();
-  auto starBatch = SpriteBatchNode::create("balls_link/stars.png", 2);
-  SpriteFrameCache::getInstance()->addSpriteFramesWithFile("balls_link/stars.plist");
+  auto starBatch = SpriteBatchNode::create(Balls_Link_Toolbar_Stars_Src, 2);
+  SpriteFrameCache::getInstance()->addSpriteFramesWithFile(Balls_Link_Toolbar_Stars_Plist_Src);
   for(int i = 0; i < No_STAR; i++) {
     auto sprite = Sprite::createWithSpriteFrameName("star_up.png");
     sprite->setAnchorPoint(Vec2(0, 1));
@@ -73,38 +73,45 @@ void TopToolbarLayer::generateAC() {
   srand(time(NULL));
   auto index = (rand() % No_AC);
   auto ac = allAc.at(index);
+  auto noBalls = allNoBalls.at(index);
   for(int i = 0; i < No_HOLDER; i++) {
-    auto sprite = Sprite::create("balls_link/holder.png");
+    auto sprite = Sprite::create(Balls_Link_Toolbar_Holder_Src);
     sprite->setScale(service->getScale2());
     auto pos = service->getHolderPosition();
     sprite->setPosition(Vec2(pos.x + (i * HOLDER_DISTANCE_RATE), pos.y));
     addChild(sprite, TopToolbarLayer::Order::holder, TopToolbarLayer::Tag::tagHolder);
     
-    auto ball = Ball::initBallWithIndex(ac.at(i));
+    auto ball = BallLayer::initBallWithIndex(ac.at(i));
+    
     auto posHolder = sprite->getPosition();
     ball->setPosition(Vec2(posHolder.x, posHolder.y + 8));
+    ball->toolbarNoBalls = 0;
+    ball->toolbarNoBallsInit = noBalls.at(i);
+    ball->createLabel();
     addChild(ball, TopToolbarLayer::Order::ball, TopToolbarLayer::Tag::tagBall);
     balls.pushBack(ball);
-    
-    auto label = Label::createWithTTF("2/10","fonts/arial.ttf", 20);
-    label->setPosition(Vec2(posHolder.x, posHolder.y - 30));
-    addChild(label, TopToolbarLayer::Order::label, TopToolbarLayer::Tag::tagLabel);
   }
 }
 
 void TopToolbarLayer::generateTimes() {
   auto service = Service::getInstance();
   auto pos = service->getToolBarPosition();
-  auto label = Label::createWithTTF("20","fonts/arial.ttf", 40);
-  label->setPosition(Vec2(pos.x + 40, pos.y - (getBg()->getContentSize().height/2 - 15)));
-  addChild(label, TopToolbarLayer::Order::label, TopToolbarLayer::Tag::tagLabel);
+  setTimes(Balls_Link_Time_You_Can_Play);
+  _timesLabel = Label::createWithTTF(std::to_string(getTimes()), Balls_Link_Font_Src, Balls_Link_Time_You_Can_Play_Font_Size);
+  _timesLabel->setPosition(Vec2(pos.x + 40, pos.y - (getBg()->getContentSize().height/2 - 15)));
+  addChild(_timesLabel, TopToolbarLayer::Order::label, TopToolbarLayer::Tag::tagLabel);
 }
 
-Ball* TopToolbarLayer::getBallByIndex(int index) {
-  for(Ball* ball: balls) {
-    if(ball->index == index)  {
-      return ball;
+BallLayer* TopToolbarLayer::getBallByIndex(int index) {
+  for(BallLayer* ballLayer: balls) {
+    if(ballLayer->ball->index == index)  {
+      return ballLayer;
     }
   }
   return NULL;
+}
+
+void TopToolbarLayer::processEnd() {
+  setTimes(getTimes() - 1);
+  getTimesLabel()->setString(std::to_string(getTimes()));
 }

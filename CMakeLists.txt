@@ -161,6 +161,7 @@ set(GAME_SRC
   Classes/BallsLink/Layers/TopToolbarLayer.cpp
   Classes/BallsLink/Layers/TestLayer.cpp
   Classes/BallsLink/Layers/PopupEndChapter.cpp
+  Classes/BallsLink/Layers/BallLayer.cpp
 
   Classes/BallsLink/Sprites/Ball.cpp
   Classes/BallsLink/Services/Service.cpp
@@ -193,6 +194,7 @@ set(GAME_HEADERS
   Classes/BallsLink/Layers/TopToolbarLayer.h
   Classes/BallsLink/Layers/TestLayer.h
   Classes/BallsLink/Layers/PopupEndChapter.h
+  Classes/BallsLink/Layers/BallLayer.h
 
   Classes/BallsLink/Sprites/Ball.h
   Classes/BallsLink/Services/Service.h

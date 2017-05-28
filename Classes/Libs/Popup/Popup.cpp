@@ -33,10 +33,10 @@ bool Popup::init() {
   addChild(_popupLayer);
   // Action
   _appearAction = TargetedAction::create(_popupLayer,
-                  MoveTo::create(4.0,
+                  MoveTo::create(0.5,
                   Vec2(_origin.x, _origin.y)));
   _disappearAction = TargetedAction::create(_popupLayer,
-                     MoveTo::create(4.0,
+                     MoveTo::create(0.5,
                      Vec2(_visibleSize.width, _origin.y)));
   
   _appearAction->retain();

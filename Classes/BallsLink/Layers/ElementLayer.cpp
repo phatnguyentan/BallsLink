@@ -102,7 +102,6 @@ void ElementLayer::createSprite() {
 
 void ElementLayer::processEndLogic(TopToolbarLayer* toolbar) {
   setToolbar(toolbar);
-  getBatch()->setScale(0.9);
   auto move = CallFunc::create(CC_CALLBACK_0(ElementLayer::moveBatch, this));
   auto delay = DelayTime::create(0.3);
   auto remove = CallFunc::create(CC_CALLBACK_0(ElementLayer::removeBatch, this));
@@ -130,7 +129,12 @@ void ElementLayer::moveBatch() {
     auto currentPos = convertToWorldSpace(getBatch()->getPosition());
     auto moveTo = MoveTo::create(0.2, Vec2(pos.x - currentPos.x + 30, pos.y - currentPos.y + 30));
     auto seq = Sequence::create(moveTo, nullptr);
+    getBatch()->setScale(0.9);
     getBatch()->runAction(seq);
+    ballAc->toolbarNoBalls += 1;
+    ballAc->toolbarLabel->setString(ballAc->getStringLabel());
+  } else {
+//    getBatch()->setOpacity(50);
   }
 }
 

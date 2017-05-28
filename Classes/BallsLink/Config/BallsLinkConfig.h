@@ -18,5 +18,15 @@
 
 #define Balls_Link_Threshold_Balls_Can_Remove (3)
 
+#define Balls_Link_Time_You_Can_Play (2)
+#define Balls_Link_Time_You_Can_Play_Font_Size (40)
+#define Balls_Link_AC_Font_Size (20)
+
+#define Balls_Link_Font_Src ("fonts/arial.ttf")
+#define Balls_Link_Toolbar_Holder_Src ("balls_link/holder.png")
+#define Balls_Link_Toolbar_Bg_Src ("balls_link/toolbar.png")
+#define Balls_Link_Toolbar_Stars_Src ("balls_link/stars.png")
+#define Balls_Link_Toolbar_Stars_Plist_Src ("balls_link/stars.plist")
+
 #endif /* BALLSLINKCONFIG_H */
 
