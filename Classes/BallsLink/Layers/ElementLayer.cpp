@@ -46,7 +46,7 @@ bool ElementLayer::init() {
   _holder->setPosition(Vec2(0, 0));
   _holder->setAnchorPoint(Vec2(0, 0));
   auto service = Service::getInstance();
-  _holder->changeWidthAndHeight(service->getElSize(), service->getElSize());
+  _holder->changeWidthAndHeight(service->getElSize().width/2, service->getElSize().height/2);
   _holder->setOpacity(0);
   addChild(_holder, 1, kTagHolder);
   setActive(false);

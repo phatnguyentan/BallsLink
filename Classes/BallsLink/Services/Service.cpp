@@ -30,42 +30,29 @@ Service* Service::getInstance() {
   return service;
 }
 
-float Service::getScale(Size size) {
-  Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width / size.width;
-}
-
 float Service::getScale() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width / 1080;
-}
-
-float Service::getScale2() {
-  return getScale() * 1.75;
+  return visibleSize.width / getBgSize().width;
 }
 
 int Service::getMapLength() {
   return 8;
 }
 
-int Service::getElRealSize() {
-  return 117;
-}
-
-int Service::getElSize() {
-  return getElRealSize() * getScale() * 1.1;
+Size Service::getElSize() {
+  return getTiledMapSize();
 }
 
 Vec2 Service::getElPosition(int i, int j) {
   return Vec2(
-        service->getElSize() * i + getPlayFrameX(), 
-        service->getElSize() * j + getPlayFrameY()
+        service->getElSize().width/2 * i + getPlayFrameX(), 
+        service->getElSize().height/2 * j + getPlayFrameY()
       );
 }
 
 float Service::getPlayFrameX() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width * 0.03;
+  return visibleSize.width * 0.07;
 }
 
 float Service::getPlayFrameY() {

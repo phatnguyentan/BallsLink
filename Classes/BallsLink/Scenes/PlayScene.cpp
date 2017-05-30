@@ -40,7 +40,8 @@ Scene *PlayScene::createScene()
   sprite->setAnchorPoint(Vec2(0, 0));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
-  sprite->setScale(service->getScale2());
+  service->setBgSize(sprite->getContentSize());
+  sprite->setScale(service->getScale());
   scene->addChild(sprite, kTagBg);
   auto panelLayer = PanelLayer::create();
   scene->addChild(panelLayer);

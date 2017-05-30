@@ -36,7 +36,7 @@ BallLayer* BallLayer::initBallWithIndex(int index) {
   
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
-  sprite->setScale(service->getScale2());
+  sprite->setScale(service->getScale());
   
   layer->ball->addChild(sprite);
   

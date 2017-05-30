@@ -30,7 +30,7 @@ TopToolbarLayer::~TopToolbarLayer() {
 bool TopToolbarLayer::init() {
   auto service = Service::getInstance();
   auto sprite = Sprite::create(Balls_Link_Toolbar_Bg_Src);
-  sprite->setScale(service->getScale2());
+  sprite->setScale(service->getScale());
   sprite->setAnchorPoint(Vec2(0, 1));
   service->setToolbarBg(sprite);
   addChild(sprite, TopToolbarLayer::Order::bg, TopToolbarLayer::Tag::tagBg);
@@ -60,7 +60,7 @@ void TopToolbarLayer::generateStar() {
       sprite->setPosition(Vec2(star1Position.x + 55, star1Position.y + 110));
     }
     
-    sprite->setScale(service->getScale2());
+    sprite->setScale(service->getScale());
     getStars().pushBack(sprite);
     starBatch->addChild(sprite, TopToolbarLayer::Order::star, TopToolbarLayer::Tag::tagStar);
   }
@@ -76,7 +76,7 @@ void TopToolbarLayer::generateAC() {
   auto noBalls = allNoBalls.at(index);
   for(int i = 0; i < No_HOLDER; i++) {
     auto sprite = Sprite::create(Balls_Link_Toolbar_Holder_Src);
-    sprite->setScale(service->getScale2());
+    sprite->setScale(service->getScale());
     auto pos = service->getHolderPosition();
     sprite->setPosition(Vec2(pos.x + (i * HOLDER_DISTANCE_RATE), pos.y));
     addChild(sprite, TopToolbarLayer::Order::holder, TopToolbarLayer::Tag::tagHolder);

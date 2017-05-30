@@ -131,8 +131,9 @@ void PanelLayer::initBg() {
   _chap = Chap::getInstance();
   _chap->init();
   auto service = Service::getInstance();
-  _chap->getMap()->setScale(service->getScale2());
+  _chap->getMap()->setScale(service->getScale());
   _chap->getMap()->setPosition(Vec2(service->getPlayFrameX(), service->getPlayFrameY()));
+  service->setTiledMapSize(_chap->getMap()->getTileSize());
   addChild(_chap->getMap(), kOrderBg, kTagBg);
 }
 

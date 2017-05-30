@@ -59,8 +59,8 @@ Color3B Ball::colorBalls[TOTAL_NUMBER_NORMAL] = {
 
 void Ball::lift() {
   auto service = Service::getInstance();
-  auto bigger = service->getScale2() + 0.1;
-  auto normal = service->getScale2() + 0.05;
+  auto bigger = service->getScale() + 0.1;
+  auto normal = service->getScale() + 0.05;
   
   auto delay = DelayTime::create(0.2);
   auto scale1 = CallFunc::create(CC_CALLBACK_0(Ball::scale, this, bigger, normal));
@@ -99,7 +99,7 @@ Ball* Ball::initBall(Ball* other) {
   sprite->setAnchorPoint(Vec2(0.5, 0.5));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
-  sprite->setScale(service->getScale2());
+  sprite->setScale(service->getScale());
   if (other) {
     ball->setPosition(Vec2(other->getPositionX(), other->getPositionY() + 60));
   } else {
@@ -122,7 +122,7 @@ Ball* Ball::initBallWithIndex(int index) {
   
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
-  sprite->setScale(service->getScale2());
+  sprite->setScale(service->getScale());
   
   ball->addChild(sprite, 0, kTagNormal);
 
@@ -146,7 +146,7 @@ MoveBy* Ball::move(float x, float y) {
 void Ball::stopLift() {
   this->getChildByTag(kTagNormal)->stopAction(this->getChildByTag(kTagNormal)->getActionByTag(kTagLift));
   auto service = Service::getInstance();
-  scale(service->getScale2(), service->getScale2());
+  scale(service->getScale(), service->getScale());
 }
 
 void Ball::zoom(float x, float y) {

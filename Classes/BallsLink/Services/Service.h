@@ -25,20 +25,21 @@ public:
   virtual ~Service();
   
   static Service* getInstance();
-  float getScale(Size size);
+//  float getScale(Size size);
   float getScale();
-  float getScale2();
+//  float getScale2();
   float getPlayFrameX();
   float getPlayFrameY();
   Vec2 getToolBarPosition();
   Vec2 getStarPosition();
   Vec2 getHolderPosition();
-  int getElSize();
-  int getElRealSize();
+  Size getElSize();
   int getMapLength();
   Vec2 getElPosition(int i, int j);
   
   CC_SYNTHESIZE(Sprite*, _toolbarBg, ToolbarBg);
+  CC_SYNTHESIZE(Size, _bgSize, BgSize);
+  CC_SYNTHESIZE(Size, _tiledMapSize, TiledMapSize);
 private:
 
 };
