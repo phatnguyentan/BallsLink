@@ -164,10 +164,6 @@ void Ball::hideBreakBall() {
   getChildByTag(kTagNormal)->setVisible(true);
 }
 
-std::string Ball::getStringLabel() {
-  return std::to_string(toolbarNoBalls) + "/" + std::to_string(toolbarNoBallsInit);
-}
-
 Color3B Ball::getColor() {
   return colorBalls[index];
 }

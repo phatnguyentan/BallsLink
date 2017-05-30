@@ -45,7 +45,8 @@ BallLayer* BallLayer::initBallWithIndex(int index) {
 }
 
 std::string BallLayer::getStringLabel() {
-  return std::to_string(toolbarNoBalls) + "/" + std::to_string(toolbarNoBallsInit);
+  auto service = Service::getInstance();
+  return service->toStr(toolbarNoBalls) + "/" + service->toStr(toolbarNoBallsInit);
 }
 
 void BallLayer::createLabel() {

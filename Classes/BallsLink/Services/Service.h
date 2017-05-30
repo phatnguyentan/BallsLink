@@ -29,6 +29,7 @@ public:
   float getScale();
 //  float getScale2();
   float getPlayFrameX();
+  std::string toStr(int number);
   float getPlayFrameY();
   Vec2 getToolBarPosition();
   Vec2 getStarPosition();

@@ -97,7 +97,7 @@ void TopToolbarLayer::generateTimes() {
   auto service = Service::getInstance();
   auto pos = service->getToolBarPosition();
   setTimes(Balls_Link_Time_You_Can_Play);
-  _timesLabel = Label::createWithTTF(std::to_string(getTimes()), Balls_Link_Font_Src, Balls_Link_Time_You_Can_Play_Font_Size);
+  _timesLabel = Label::createWithTTF(service->toStr(getTimes()), Balls_Link_Font_Src, Balls_Link_Time_You_Can_Play_Font_Size);
   _timesLabel->setPosition(Vec2(pos.x + 40, pos.y - (getBg()->getContentSize().height/2 - 15)));
   addChild(_timesLabel, TopToolbarLayer::Order::label, TopToolbarLayer::Tag::tagLabel);
 }
@@ -112,6 +112,7 @@ BallLayer* TopToolbarLayer::getBallByIndex(int index) {
 }
 
 void TopToolbarLayer::processEnd() {
+  auto service = Service::getInstance();
   setTimes(getTimes() - 1);
-  getTimesLabel()->setString(std::to_string(getTimes()));
+  getTimesLabel()->setString(service->toStr(getTimes()));
 }

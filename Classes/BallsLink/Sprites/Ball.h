@@ -36,7 +36,6 @@ public:
   void zoom(float x, float y);
   void showBreakBall();
   void hideBreakBall();
-  std::string getStringLabel();
   Color3B getColor();
   static const char *normalBalls[TOTAL_NUMBER_NORMAL];
   static const char *brokenBalls[TOTAL_NUMBER_NORMAL];
