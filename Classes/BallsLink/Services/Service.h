@@ -27,6 +27,7 @@ public:
   static Service* getInstance();
 //  float getScale(Size size);
   float getScale();
+  float getScaleFullWidth(Sprite* sprite);
 //  float getScale2();
   float getPlayFrameX();
   std::string toStr(int number);

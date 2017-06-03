@@ -35,8 +35,13 @@ float Service::getScale() {
   return visibleSize.width / getBgSize().width;
 }
 
+float Service::getScaleFullWidth(Sprite* sprite) {
+  Size visibleSize = Director::getInstance()->getVisibleSize();
+  return visibleSize.width / sprite->getContentSize().width;
+}
+
 int Service::getMapLength() {
-  return 8;
+  return 7;
 }
 
 Size Service::getElSize() {
@@ -52,7 +57,7 @@ Vec2 Service::getElPosition(int i, int j) {
 
 float Service::getPlayFrameX() {
   Size visibleSize = Director::getInstance()->getVisibleSize();
-  return visibleSize.width * 0.07;
+  return visibleSize.width * 0.013;
 }
 
 float Service::getPlayFrameY() {

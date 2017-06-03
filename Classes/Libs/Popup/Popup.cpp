@@ -13,6 +13,8 @@
 
 #include "Popup.h"
 
+#define TIME_TAKE_ACTION (0.3)
+
 Popup::Popup() {
 }
 
@@ -25,19 +27,20 @@ Popup::~Popup() {
 bool Popup::init() {
   if (!Node::init()) return false;
   _visibleSize = Director::getInstance()->getVisibleSize();
-  _origin = Director::getInstance()->getVisibleOrigin(); 
+//  _origin = Director::getInstance()->getVisibleOrigin(); 
   // Popup layer create
   _popupLayer = Layer::create();
-  _popupLayer->setAnchorPoint(Vec2(0, 0));
-  _popupLayer->setPosition(Vec2(_visibleSize.width, _origin.y));
+  _popupLayer->setAnchorPoint(Vec2(0.5, 0.5));
+  auto size = _popupLayer->getContentSize();
+  _popupLayer->setPosition(Vec2(_visibleSize.width + size.width/2, _visibleSize.height/2));
   addChild(_popupLayer);
   // Action
   _appearAction = TargetedAction::create(_popupLayer,
-                  MoveTo::create(0.5,
-                  Vec2(_origin.x, _origin.y)));
+                  MoveTo::create(TIME_TAKE_ACTION,
+                  Vec2(_visibleSize.width/2, _visibleSize.height/2)));
   _disappearAction = TargetedAction::create(_popupLayer,
-                     MoveTo::create(0.5,
-                     Vec2(_visibleSize.width, _origin.y)));
+                     MoveTo::create(TIME_TAKE_ACTION,
+                     Vec2(_visibleSize.width + size.width/2, _visibleSize.height/2)));
   
   _appearAction->retain();
   _disappearAction->retain();

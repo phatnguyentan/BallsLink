@@ -24,8 +24,9 @@ PopupEndChapter::~PopupEndChapter() {
 
 bool PopupEndChapter::init() {
   if (!Popup::init()) return false;
-  auto sprite =  Sprite::create("balls_link/toolbar.png");
-  sprite->setAnchorPoint(Vec2(0, 0));
+  auto service = Service::getInstance();
+  auto sprite =  Sprite::create("balls_link/popup.png");
+  sprite->setScale(service->getScale());
   _popupLayer->addChild(sprite);
   return true;
 }

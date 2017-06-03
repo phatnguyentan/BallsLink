@@ -16,6 +16,7 @@
 enum 
 {
     kTagBg,
+    kTagTileMapBg,
     kTagTileMap,
     kTagElementLayer,
     kTagBatch,
@@ -28,6 +29,7 @@ enum
 enum 
 {
     kOrderBg,
+    kOrderTileMapBg,
     kOrderToolBarLayer,
     kOrderElementLayer,
     kOrderPopup,
@@ -68,14 +70,11 @@ void PanelLayer::onTouchMoved(Touch *touch, Event *event) {
 }
 
 bool PanelLayer::onTouchBegan(Touch *touch, Event *event) {
-  getPopup()->appear();
   gameHandler(touch, event);
   return true;
 }
 
 void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
-  getPopup()->disappear();
-//  auto service = Service::getInstance();
   //  Need to revert order to fill correct
   auto toolbar = (TopToolbarLayer*)getChildByTag(kTagToolBarLayer);
   auto isProcces = false;
@@ -91,6 +90,19 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   }
   if (isProcces) {
     toolbar->processEnd();
+    if (toolbar->getTimes() <= 0) {
+      auto appear = CallFunc::create([&] () { 
+        // your function definition here
+        getPopup()->appear();
+      });
+      auto disappear = CallFunc::create([&] () { 
+        // your function definition here
+        getPopup()->disappear();
+      });
+      auto delay = DelayTime::create(1);
+      auto seq = Sequence::create(appear, delay, disappear, nullptr);
+      this->runAction(seq);
+    }
   } 
   setForce(true);
 }
@@ -135,6 +147,12 @@ void PanelLayer::initBg() {
   _chap->getMap()->setPosition(Vec2(service->getPlayFrameX(), service->getPlayFrameY()));
   service->setTiledMapSize(_chap->getMap()->getTileSize());
   addChild(_chap->getMap(), kOrderBg, kTagBg);
+  
+  auto sprite = Sprite::create("balls_link/maps/FrameBackground.png");
+  sprite->setScale(service->getScaleFullWidth(sprite));
+  sprite->setPosition(Vec2(0, service->getPlayFrameY() - 10));
+  sprite->setAnchorPoint(Vec2::ZERO);
+  addChild(sprite, kOrderTileMapBg, kTagTileMapBg);
 }
 
 void PanelLayer::gameHandler(Touch *touch, Event *event) {

@@ -15,6 +15,7 @@
 #define POPUPENDCHAPTER_H
 
 #include "../../Libs/Popup/Popup.h"
+#include "../Services/Service.h"
 
 class PopupEndChapter : public Popup {
 public:

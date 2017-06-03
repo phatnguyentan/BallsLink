@@ -13,20 +13,6 @@
 
 #include "Ball.h"
 
-
-
-//static const char *normalBalls[TOTAL_NUMBER_NORMAL] = {
-//  "purple.png", "red.png", "yellow.png", "blue.png", "green.png"
-//};
-
-//static const char *brokenBalls[TOTAL_NUMBER_NORMAL] = {
-//  "purple_broken.png", "red_broken.png", "yellow_broken.png", "blue_broken.png", "green_broken.png"
-//};
-
-//static Color3B colorBalls[TOTAL_NUMBER_NORMAL] = {
-//  Color3B(181, 106, 245), Color3B(245, 30, 20), Color3B(255, 210, 0), Color3B(20, 200, 220), Color3B(120, 230, 25)
-//};
-
 enum {
   kTagNormal,
   kTagLabel,
@@ -96,7 +82,7 @@ Ball* Ball::initBall(Ball* other) {
   }
   spriteBroken->setVisible(false);
   
-  sprite->setAnchorPoint(Vec2(0.5, 0.5));
+  sprite->setAnchorPoint(Vec2(0.4, 0.4));
   sprite->setPosition(Vec2(0, 0));
   auto service = Service::getInstance();
   sprite->setScale(service->getScale());

@@ -35,7 +35,7 @@ Chap* Chap::getInstance() {
 
 Chap* Chap::init() {
   _version = "1.0";
-  _map = TMXTiledMap::create("maps/chap1.tmx");
+  _map = TMXTiledMap::create("balls_link/maps/chap1.tmx");
   return chap;
 }
 
