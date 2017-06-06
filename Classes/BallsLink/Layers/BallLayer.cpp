@@ -55,3 +55,7 @@ void BallLayer::createLabel() {
     toolbarLabel->setPosition(Vec2(pos.x, pos.y - 37));
     addChild(toolbarLabel, BallLayer::Order::orderBall, BallLayer::Tag::tagBall);
 }
+
+void BallLayer::resetLabel() {
+    toolbarLabel->setString(getStringLabel());
+}

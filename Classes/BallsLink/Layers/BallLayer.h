@@ -37,6 +37,7 @@ public:
   int toolbarNoBallsInit;
   Label* toolbarLabel;
   void createLabel();
+  void resetLabel();
   std::string getStringLabel();
   
 private:

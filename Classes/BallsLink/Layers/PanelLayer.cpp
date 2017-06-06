@@ -81,7 +81,7 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   for (int i = this->_elLayers.size() - 1; i >= 0; i--) {
     if (this->_elLayers.at(i)->getActive()) {
       if(getNoBallsActive() >= Balls_Link_Threshold_Balls_Can_Remove) {
-        this->_elLayers.at(i)->processEndLogic((TopToolbarLayer*)getChildByTag(kTagToolBarLayer));
+        this->_elLayers.at(i)->processEndLogic(toolbar);
         isProcces = true;
       } else {
         this->_elLayers.at(i)->deactive();
@@ -91,20 +91,24 @@ void PanelLayer::onTouchEnded(Touch *touch, Event *event) {
   if (isProcces) {
     toolbar->processEnd();
     if (toolbar->getTimes() <= 0) {
-      auto appear = CallFunc::create([&] () { 
-        // your function definition here
+      auto appear = CallFunc::create([&] () {
         getPopup()->appear();
       });
       auto disappear = CallFunc::create([&] () { 
-        // your function definition here
         getPopup()->disappear();
       });
       auto delay = DelayTime::create(1);
-      auto seq = Sequence::create(appear, delay, disappear, nullptr);
+      auto replay = CallFunc::create(CC_CALLBACK_0(PanelLayer::replay, this));
+      auto seq = Sequence::create(appear, delay, disappear, replay, nullptr);
       this->runAction(seq);
     }
   } 
   setForce(true);
+}
+
+void PanelLayer::replay() {
+  auto toolbar = (TopToolbarLayer*)getChildByTag(kTagToolBarLayer);
+  toolbar->replay();
 }
 
 void PanelLayer::initTiledMap() {
@@ -164,9 +168,6 @@ void PanelLayer::gameHandler(Touch *touch, Event *event) {
     if (rect.containsPoint(locationInNode))
     {
   //    log("sprite began... x = %f, y = %f", locationInNode.x, locationInNode.y);
-  //    log("row %i", target->getRow());
-  //    log("column %i", target->getColumn());
-  //    log("force %d", getForce());
       if (getForce()) {
         target->active();
         setForce(false);

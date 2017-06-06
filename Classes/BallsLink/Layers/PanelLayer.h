@@ -37,6 +37,7 @@ public:
   bool onTouchBegan(Touch *touch, Event *event);
   void initBg();
   void initTopToolbar();
+  void replay();
   void gameHandler(Touch *touch, Event *event);
   bool allowActive(ElementLayer* layer);
   ElementLayer* getLayer(int row, int column);

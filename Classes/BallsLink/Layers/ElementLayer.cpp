@@ -133,8 +133,6 @@ void ElementLayer::moveBatch() {
     getBatch()->runAction(seq);
     ballAc->toolbarNoBalls += 1;
     ballAc->toolbarLabel->setString(ballAc->getStringLabel());
-  } else {
-//    getBatch()->setOpacity(50);
   }
 }
 

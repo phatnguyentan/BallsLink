@@ -72,7 +72,7 @@ Vec2 Service::getToolBarPosition() {
 
 Vec2 Service::getStarPosition() {
   auto size =  getToolbarBg()->getContentSize();
-  return Vec2(size.width * 0.03, - size.height * 0.68);
+  return Vec2(size.width * 0.03, - size.height * 0.6);
 }
 
 Vec2 Service::getHolderPosition() {

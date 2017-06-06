@@ -71,12 +71,16 @@ public:
   void generateAC();
   void generateTimes();
   void processEnd();
+  void replay();
+  void resetTimes();
   BallLayer* getBallByIndex(int index);
   virtual bool init() override;
   CC_SYNTHESIZE(Vector<Sprite*>, _stars, Stars);
+  CC_SYNTHESIZE(Vector<Sprite*>, _holders, Holders);
   CC_SYNTHESIZE(Sprite*, _bg, Bg);
   CC_SYNTHESIZE(int, _times, Times);
   CC_SYNTHESIZE(Label*, _timesLabel, TimesLabel);
+  CC_SYNTHESIZE(int, _acIndex, AcIndex);
   CREATE_FUNC(TopToolbarLayer);
 private:
 

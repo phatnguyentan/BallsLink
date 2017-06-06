@@ -54,10 +54,10 @@ void TopToolbarLayer::generateStar() {
       sprite->setPosition(Vec2(star1Position.x, star1Position.y));
     }
     if (i == 1) {
-      sprite->setPosition(Vec2(star1Position.x + 55, star1Position.y + 45));
+      sprite->setPosition(Vec2(star1Position.x + 50, star1Position.y + 40));
     }
     if (i == 2) {
-      sprite->setPosition(Vec2(star1Position.x + 55, star1Position.y + 110));
+      sprite->setPosition(Vec2(star1Position.x + 50, star1Position.y + 100));
     }
     
     sprite->setScale(service->getScale());
@@ -72,6 +72,8 @@ void TopToolbarLayer::generateAC() {
   auto service = Service::getInstance();
   srand(time(NULL));
   auto index = (rand() % No_AC);
+  setAcIndex(index);
+  
   auto ac = allAc.at(index);
   auto noBalls = allNoBalls.at(index);
   for(int i = 0; i < No_HOLDER; i++) {
@@ -102,6 +104,12 @@ void TopToolbarLayer::generateTimes() {
   addChild(_timesLabel, TopToolbarLayer::Order::label, TopToolbarLayer::Tag::tagLabel);
 }
 
+void TopToolbarLayer::resetTimes() {
+  auto service = Service::getInstance();
+  setTimes(Balls_Link_Time_You_Can_Play);
+  _timesLabel->setString(service->toStr(getTimes()));
+}
+
 BallLayer* TopToolbarLayer::getBallByIndex(int index) {
   for(BallLayer* ballLayer: balls) {
     if(ballLayer->ball->index == index)  {
@@ -115,4 +123,12 @@ void TopToolbarLayer::processEnd() {
   auto service = Service::getInstance();
   setTimes(getTimes() - 1);
   getTimesLabel()->setString(service->toStr(getTimes()));
+}
+
+void TopToolbarLayer::replay() {
+  for (BallLayer* ball: balls) {
+    ball->toolbarNoBalls = 0;
+    ball->resetLabel();
+  }
+  resetTimes();
 }
